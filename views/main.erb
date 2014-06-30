@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>YOUR FAT</title>
+<style>
+  body {
+    padding: 30px;
+    padding-top: 30px;
+    font: 10px sans-serif;
+  }
+
+  rect {
+    fill: none;
+    pointer-events: all;
+  }
+
+  circle,
+  .line {
+    fill: none;
+    /*stroke: steelblue;*/
+    stroke: grey;
+    stroke-width: 1.5px;
+  }
+
+  circle {
+    fill: #fff;
+    fill-opacity: .2;
+    /*cursor: move;*/
+  }
+
+  .selected {
+    fill: #ff7f0e;
+    stroke: #ff7f0e;
+  }
+
+</style>
+
+<h1> YOUR FAT </h1> <br><br>
+
+<label for="myheight" style="position:absolute; left:55px; top:105px;"> height (cm) </label>
+<input type="text" id="myheight" style="position:absolute; left:120px; top:100px;" required> 
+
+<label for="myweight" style="position:absolute; left:55px; top:215px;"> weight (kg)</label>
+<input type="text" id="myweight" style="position:absolute; left:120px; top:210px;" required>
+
+<label for="mybmi" style="position:absolute; left:55px; top:315px;"> BMI </label>
+<input type="text" id="mybmi" style="position:absolute; left:120px; top:310px;" required> 
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script>
+
+var margin = {top: 20, right: 60, bottom: 30, left: 20},
+    width = 440 - margin.left - margin.right,
+    height = 460 - margin.top - margin.bottom;
+
+var h1 = 10;
+var h2 = 120;
+
+var points = [ [0, h1, "h"], [0, h2, "w"] ];
+
+var dragged = null,
+    selected = points[0];
+
+var line = d3.svg.line();
+
+var svg = d3.select("body").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+svg.append("path")
+    .datum(points)
+    .attr("class", "line")
+    .call(redraw);
+
+var maxw = 50;
+
+/////////////
+var axisScale = d3.scale.linear()
+                  .domain([0, 200])
+                  .range([0, width]);
+
+var xAxis = d3.svg.axis()
+                  .tickSize(1)
+                  .tickPadding(12)
+                  .scale(axisScale)
+                  .ticks(5)
+                  .orient("bottom");
+
+var xAxisGroup = svg.append("g")
+                  .call(xAxis)
+                  .attr("transform", "translate(0, "+h1+")")
+                .append("text")
+                  .attr("class", "label")
+                  .attr("transform", "rotate(0)")
+                  .attr("x", width+16)
+                  .attr("y", -21)
+                  .attr("dy", ".71em")
+                  .style("text-anchor", "start")
+                  .text("(cm)");
+
+/////////////
+var axisScale2 = d3.scale.linear()
+                  .domain([0, 150])
+                  .range([0, width]);
+
+var xAxis2 = d3.svg.axis()
+                  .tickSize(1)
+                  .tickPadding(12)
+                  .scale(axisScale2)
+                  .ticks(5)
+                  .orient("bottom");
+
+var xAxisGroup2 = svg.append("g")
+                  .call(xAxis2)
+                  .attr("transform", "translate(0, "+h2+")")
+                .append("text")
+                  .attr("class", "label")
+                  .attr("transform", "rotate(0)")
+                  .attr("x", width+16)
+                  .attr("y", 12)
+                  .attr("dy", ".71em")
+                  .style("text-anchor", "start")
+                  .text("(kg)");
+
+var heightScale = d3.scale.linear()
+                    .domain([0,width])
+                    .range([0,200]);
+
+var weightScale = d3.scale.linear()
+                    .domain([0,width])
+                    .range([0,150]);
+
+///////////////
+d3.select(window)
+    .on("mousemove", mousemove)
+    .on("mouseup", mouseup);
+
+// drawrect();
+
+function redraw() {
+  drawrect();
+  // var rect = svg.selectAll("rect")
+  //     .data(points, function(d) { return d; })
+  //     .enter().append("rect");
+
+  var rect = svg.data(points, function(d) { return d; })
+      .enter().append("rect");
+
+  rect.attr("x", 0)
+      .attr("y", 0)
+      .attr("width", width)
+      .attr("height", height);
+
+  var circle = svg.selectAll("circle")
+      .data(points, function(d) { return d; });
+
+  circle.enter().append("circle")
+      .attr("r", 1e-6)
+      .on("mousedown", function(d) { selected = dragged = d; redraw(); })
+    .transition()
+      .duration(750)
+      .ease("elastic")
+      .attr("r", 6.5);
+
+  circle
+      .classed("selected", function(d) { return d === selected; })
+      .attr("cx", function(d) { return d[0]; }) // x
+      .attr("cy", function(d) { return d[1]; });
+
+  // drawrect();
+
+  if(!dragged) {
+    document.getElementById("myheight").value = 0;
+    document.getElementById("myweight").value = 0;
+    document.getElementById("mybmi").value = 0;
+
+  } else {
+    var temph = document.getElementById("myheight").value;
+    var tempw = document.getElementById("myweight").value;
+    var tempbmi = d3.format(".2f")(tempw/(temph * temph / 10000));
+
+    tempbmi = Math.max(0, Math.min(tempbmi, 100));
+    // console.log(temph);
+
+
+    if(dragged[2] === "h") {
+    
+      document.getElementById("myheight").value = d3.format(".2f")(heightScale( dragged[0] ));
+      document.getElementById("mybmi").value = tempbmi;
+
+    } else if(dragged[2] === "w") {
+
+      document.getElementById("myweight").value = d3.format(".2f")(weightScale( dragged[0] ));
+      document.getElementById("mybmi").value = tempbmi;
+    }
+
+
+    var txScale = d3.scale.linear()
+                  .domain([0, maxw])
+                  .range([0, width]);
+
+    var tx = txScale( Math.max(0+0.2, Math.min(maxw-0.2, tempbmi)) );
+
+
+    var bmiline = svg.append("line")
+      .attr("x1", tx)
+      .attr("x2", tx)
+      .attr("y1", h2+100)
+      .attr("y2", h2+100+100)
+      .attr("stroke", "#000")
+      .attr("stroke-width", 1)
+      .style("opacity", 1);
+  }
+
+}
+
+// function mousedown() {
+  // points.push(selected = dragged = d3.mouse(svg.node()));
+  // redraw();
+// }
+
+
+function mousemove() {
+  if (!dragged) return;
+  var m = d3.mouse(svg.node());
+
+  dragged[0] = Math.max(0, Math.min(width, m[0]));
+  dragged[1] = Math.max(0, Math.min(height, m[1]));
+
+  if(dragged[2] === "h") {
+    dragged[1] = h1; // fixed x
+  } else {
+    dragged[1] = h2;
+  }
+  redraw();
+}
+
+function mouseup() { // when mouse is released
+  if (!dragged) return;
+  mousemove();
+  dragged = null;
+}
+
+function drawrect() {
+  var tempScale = d3.scale.linear()
+                  .domain([0, maxw])
+                  .range([0, width]);
+
+  var x1 = tempScale(18.5);
+  var x2 = tempScale(25);
+  var x3 = tempScale(30);
+  var x4 = tempScale(50);
+
+  var g = 100;
+
+  var underw = svg
+                .append("rect")
+                  .attr("x", 0)
+                  .attr("y", h2+g)
+                  .attr("width", x1)
+                  .attr("height", 100)
+                  .style("fill", "#8dd4ff")
+                // .append("line")
+                  .attr("stroke-width", 2)
+                  .attr("stroke", "white");
+
+  var normalw = svg.append("rect")
+                  .attr("x", x1)
+                  .attr("y", h2+g)
+                  .attr("width", x2-x1)
+                  .attr("height", 100)
+                  .style("fill", "#0092ff")
+                  .attr("stroke-width", 2)
+                  .attr("stroke", "white");
+
+  var overw = svg.append("rect")
+                  .attr("x", x2)
+                  .attr("y", h2+g)
+                  .attr("width", x3-x2)
+                  .attr("height", 100)
+                  .style("fill", "#ffb5b3")
+                  .attr("stroke-width", 2)
+                  .attr("stroke", "white");
+
+  var obesityw = svg.append("rect")
+                  .attr("x", x3)
+                  .attr("y", h2+g)
+                  .attr("width", x4-x3)
+                  .attr("height", 100)
+                  .style("fill", "#ff0f00")
+                  .attr("stroke-width", 2)
+                  .attr("stroke", "white");
+}
+
+
+// $( document ).ready(function() {
+//   $('input[id="myheight"]').change(function(){
+//     console.log( document.getElementById('myheight').value );
+//   });
+// });
+
+
+</script>
+
