@@ -34,16 +34,19 @@
 
 </style>
 
-<h1> YOUR FAT </h1> <br><br>
+<h2> YOUR FAT </h2> <br><br>
 
-<label for="myheight" style="position:absolute; left:55px; top:105px;"> height (cm) </label>
-<input type="text" id="myheight" style="position:absolute; left:120px; top:100px;" required> 
+<link href="/css/bootstrap.min.css" rel="stylesheet">
+<link href="/js/bootstrap.min.js" rel="stylesheet">
 
-<label for="myweight" style="position:absolute; left:55px; top:215px;"> weight (kg)</label>
-<input type="text" id="myweight" style="position:absolute; left:120px; top:210px;" required>
+<label for="myheight" style="position:absolute; left:55px; top:145px;"> height (cm) </label>
+<input type="text" id="myheight" style="position:absolute; left:150px; top:140px;" required> 
 
-<label for="mybmi" style="position:absolute; left:55px; top:315px;"> BMI </label>
-<input type="text" id="mybmi" style="position:absolute; left:120px; top:310px;" required> 
+<label for="myweight" style="position:absolute; left:55px; top:255px;"> weight (kg)</label>
+<input type="text" id="myweight" style="position:absolute; left:150px; top:250px;" required>
+
+<label for="mybmi" style="position:absolute; left:55px; top:365px;"> BMI </label>
+<input type="text" id="mybmi" style="position:absolute; left:150px; top:360px;" required> 
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script src="http://d3js.org/d3.v3.min.js"></script>
@@ -53,8 +56,8 @@ var margin = {top: 20, right: 60, bottom: 30, left: 20},
     width = 440 - margin.left - margin.right,
     height = 460 - margin.top - margin.bottom;
 
-var h1 = 10;
-var h2 = 120;
+var h1 = 30;
+var h2 = 140;
 
 var points = [ [0, h1, "h"], [0, h2, "w"] ];
 
@@ -137,7 +140,7 @@ d3.select(window)
     .on("mousemove", mousemove)
     .on("mouseup", mouseup);
 
-// drawrect();
+drawrect();
 
 function redraw() {
   drawrect();
