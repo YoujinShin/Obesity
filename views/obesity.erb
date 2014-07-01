@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<head>
+	<meta charset="utf-8">
+	<title>MY BMI</title>
+
+	<style>
+		body {
+			padding-top: 30px;
+			padding-left: 80px;
+			padding-right: 8%;
+			padding-bottom: 30px;
+		}
+		input[type=text]
+		{
+		    background-color: transparent; 
+			border-style: solid; 
+			border-width: 0px 0px 1px 0px; 
+			border-color: black;
+		}
+		input:focus
+		{ 
+			outline: 0;
+		}
+		form {
+			padding-top: 30px;
+		}
+	</style>
+
+	<link href="/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/js/bootstrap.min.js" rel="stylesheet">
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+</head>
+
+<!--  -->
+<body>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+
+<h1> BMI </h1> 
+
+<br><p>Calculate Your Body Mass Index</p>
+
+<form class="form-horizontal" role="form">
+
+  <div class="form-group">
+    <label class="col-sm-1 control-label">Height</label>
+    <div class="col-sm-2">
+      <input type="text"  id="myheight">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="col-sm-1 control-label">Weight</label>
+    <div class="col-sm-2">
+      <input type="text" id="myweight">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-sm-offset-1 col-sm-10">
+      <button onclick="getBMI()" type="button" class="btn btn-default" style="">Get BMI</button>
+    </div>
+  </div>
+
+  <div class="form-group"></div>
+
+  <div class="form-group">
+    <label class="col-sm-1 control-label"> BMI
+    </label>
+
+    <div class="col-sm-2">
+      <input type="text" id="mybmi">
+    </div>
+  </div>
+
+  <div class="form-group">
+		<script src="/js/bmi.js"></script>
+  </div>
+</form>
+
+<p id="mybmiStatus"></p>
+
+<!-- <script src="/js/bmi.js"></script> -->
+
+<!-- <label for="mybmi" style="position:absolute; left:55px; top:365px;"> BMI </label>
+<input type="text" id="mybmi" style="position:absolute; left:150px; top:360px;" required>  -->
+
+<!-- <script src="http://d3js.org/d3.v3.min.js"></script> -->
+
+
+
+</body>
