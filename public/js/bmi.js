@@ -8,10 +8,8 @@ var svg = d3.select("body").append("svg")
   .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-// var maxw = 50;
 var maxWidth = 50;
 drawrect();
-
 
 
 function getBMI() {
@@ -20,7 +18,6 @@ function getBMI() {
   var tempbmi = d3.format(".2f")(tempw/(temph * temph / 10000));
 
   tempbmi = Math.max(0, Math.min(tempbmi, maxWidth));
-  // console.log(tempbmi);
 
   document.getElementById("mybmi").value = tempbmi;
 
@@ -50,7 +47,6 @@ function drawLine(t) {
 
     var tx = txScale( Math.max(0+0.0, Math.min(maxWidth-0.0, t)) );
 
-
     var bmiline = svg.append("line")
       .attr("x1", tx)
       .attr("x2", tx)
@@ -58,8 +54,7 @@ function drawLine(t) {
       .attr("y2", height)
       .attr("stroke", "#000")
       .attr("stroke-width", 1)
-      .style("opacity", 1);
-  
+      .style("opacity", 1); 
 }
 
 function drawrect() {
@@ -73,12 +68,10 @@ function drawrect() {
   var x4 = tempScale(50);
 
   var g = 0;
-
   var h2 = 0;
   var h = 30;
 
-  var underw = svg
-                .append("rect")
+  var underw = svg.append("rect")
                   .attr("x", 0)
                   .attr("y", h2+g)
                   .attr("width", x1)
