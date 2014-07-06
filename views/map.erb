@@ -64,6 +64,13 @@ var legend = svg.append("g")
     .style("fill", color)
     .on("click", clicklegend);
 
+var tooltip = d3.select("body")
+  .append("div")
+  .style("position", "absolute")
+  .style("z-index", "10")
+  .style("visibility", "hidden")
+  .text("a simple tooltip");
+
 // d3.select(self)
 //     // .on("keydown", keydown)
 //     .node().focus();
@@ -81,22 +88,18 @@ d3.json("us.json", function(error, us) {
       .attr("class", "background")
       .attr("d", path);
 
-////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////
-
-  //여기부터하기 !!!!!!
   var merge = svg.append("g")
       .attr("class", "merge")
     .selectAll("path")
       .data(components)
     .enter().append("path")
       .style("fill", function(d, i) { return color(i); })
+      // .style("stroke", function(d, i) { return "white"; });
       .style("stroke", function(d, i) { return d3.lab(color(i)).darker(); });
 
   svg.append("g")
       .attr("class", "foreground")
-      .style("cursor", "pointer")
+      // .style("cursor", "pointer")
       .style("stroke-opacity", .5)
     .selectAll("path")
       .data(features)
@@ -108,19 +111,34 @@ d3.json("us.json", function(error, us) {
         .on("dragstart", dragstart)
         .on("drag", drag));
 
-  top.location.hash.split("").slice(1, features.length).forEach(function(c, i) {
-    if ((c = +c) >= 0 && c < 10) assign(features[i], c ? c - 1 : null);
-  });
+//////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
+  // 여기부터하기 !!!!!!
 
-  redraw();
+  // top.location.hash.split("").slice(1, features.length).forEach(function(c, i) {
+  //   if ((c = +c) >= 0 && c < 10) assign(features[i], c ? c - 1 : null);
+  // });
+
+  // redraw();
 
   function dragstart() {
     var feature = d3.event.sourceEvent.target.__data__;
-    if (assign(feature, dragColor = feature.color === selectedColor ? null : selectedColor)) redraw();
+    // console.log(selectedColor);
+    
+    // if (assign(feature, dragColor = feature.color === selectedColor ? null : selectedColor)) {
+    //   redraw();
+    // }
+
+    // redraw();
+    if (assign(feature, dragColor = selectedColor)) {
+      redraw();
+    }
   }
 
   function drag() {
     var feature = d3.event.sourceEvent.target.__data__;
+    // redraw();
     if (feature && assign(feature, dragColor)) redraw();
   }
 
@@ -136,13 +154,18 @@ d3.json("us.json", function(error, us) {
       component.splice(bisectId(component, feature.id), 0, feature);
       feature.color = color;
     }
+
     return true;
   }
 
   function redraw() {
-    merge.data(components).attr("d", function(d) { return path({type: "FeatureCollection", features: d}) || "M0,0"; });
-    top.history.replaceState(null, null, "#" + features.map(function(d) { return d.color === null ? "0" : d.color + 1; }).join(""));
+    merge.data(components).attr("d", function(d) { 
+      return path({type: "FeatureCollection", features: d}) || "M0,0";
+    });
+
+    // top.history.replaceState(null, null, "#" + features.map(function(d) { return d.color === null ? "0" : d.color + 1; }).join(""));
   }
+
 });
 
 function clicklegend(d) {
@@ -159,5 +182,4 @@ function clicklegend(d) {
 // }
 
 // d3.select(self.frameElement).style("height", height + "px");
-
 </script>

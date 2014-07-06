@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+.states {
+	fill: none;
+	stroke: #fff;
+	stroke-linejoin: round;
+}
+
+#tooltip {
+	position: absolute;
+	z-index: 10;
+	visibility: hidden;
+	background-color: #fff;
+	font-family: sans-serif;
+	font-size: 10px;
+	padding: 2px;
+	/*box-shadow: 0px 0px 0px #000;*/
+	/*border: 0px solid grey;*/
+}
+
+.test {
+	fill: rgba(0,0,0,0.1);
+}
+
+.q0-9 { fill: rgb(222,235,247); }
+.q1-9 { fill: rgb(158,202,225); }
+.q2-9 { fill: rgb(66,146,198); }
+.q3-9 { fill: rgb(8,81,156); }
+
+</style>
+
+<body>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script src="http://d3js.org/queue.v1.min.js"></script>
+<script src="http://d3js.org/topojson.v1.min.js"></script>
+
+<script>
+
+var width = 760.
+	height = 400;
+
+var rateById = d3.map();
+
+var quantize = d3.scale.quantize()
+	.domain([0, .15])
+	.range(d3.range(4).map(function(i) { return "q"+i+"-9"}));
+
+var projection = d3.geo.albersUsa()
+	.scale(600)
+	.translate([400, 200]);
+
+var path = d3.geo.path()
+	.projection(projection);
+
+var svg = d3.select("body").append("svg")
+	.attr("width", width)
+	.attr("height", height);
+
+var tooltip = d3.select("body")
+	.append("div")
+	.attr("id", "tooltip");
+
+queue()
+	// .defer(d3.json, "us.json") // topojson
+	.defer(d3.json, "us-states.json") // geojson
+	.defer(d3.tsv, "temp.tsv", function(d) {
+		rateById.set(d.id, +d.rate);
+	})
+	.await(ready);
+
+function ready(error, us) {
+
+	svg.append("g")
+			.attr("class", "states")
+		.selectAll("path")
+			// .data(topojson.feature(us, us.objects.states).features) // topojson
+			.data(us.features) // geojson		
+		.enter().append("path")
+			.attr("class", function(d) {
+				// console.log(d.id+": "+rateById.get(d.id)+", "+quantize(rateById.get(d.id)));
+				return quantize(rateById.get(d.id));
+			})
+			.attr("d", path)
+
+		// for tooltip
+	    .on("mouseover", function(d){
+	    	// console.log(d.properties.name);
+
+	      	tooltip.text(d.properties.name+": " + rateById.get(d.id) );
+	      	d3.select(this).style('stroke-width','2px');
+	      	d3.select(this).style('stroke','red');
+	      	tooltip.style("visibility", "visible");
+	    })
+	    .on("mousemove", function(){
+	      tooltip.style("top", (event.pageY-10)+"px").style("left",(event.pageX+10)+"px");})
+	    .on("mouseout", function(){
+	      d3.select(this).style('stroke-width','1px');
+	      d3.select(this).style('stroke','#fff');
+	      tooltip.style("visibility", "hidden");});
+}
+
+// d3.json("us-states.json", function(json) {
+
+//         svg.selectAll("path")
+//            .data(json.features)
+//            .enter()
+//            .append("path")
+//            .attr("d", path);
+// });
+
+</script>
+
+

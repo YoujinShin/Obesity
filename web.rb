@@ -12,3 +12,11 @@ end
 get '/map' do
 	erb :map
 end
+
+get '/map2' do
+	erb :map2
+end
+
+get '/map_state' do
+	erb :map_state
+end
