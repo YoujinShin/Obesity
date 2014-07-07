@@ -1,0 +1,31 @@
+.states {
+	fill: none;
+	stroke: #fff;
+	stroke-linejoin: round;
+}
+
+#tooltip {
+	position: absolute;
+	z-index: 10;
+	visibility: hidden;
+	background-color: #fff;
+	font-family: sans-serif;
+	font-size: 11px;
+	padding: 2px;
+	/*box-shadow: 0px 0px 0px #000;*/
+	/*border: 0px solid grey;*/
+}
+
+.test {
+	fill: rgba(0,0,0,0.1);
+}
+
+/*.q0-9 { fill: rgb(222,235,247); }
+.q1-9 { fill: rgb(158,202,225); }
+.q2-9 { fill: rgb(66,146,198); }
+.q3-9 { fill: rgb(8,81,156); }*/
+
+.q0-9 { fill: #b1ddff; }
+.q1-9 { fill: #0092ff; }
+.q2-9 { fill: #ffd3b1; }
+.q3-9 { fill: #ff6d00; }

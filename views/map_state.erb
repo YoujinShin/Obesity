@@ -4,7 +4,7 @@
 
 .states {
 	fill: none;
-	stroke: #000;
+	stroke: #fff;
 	stroke-linejoin: round;
 }
 
@@ -14,7 +14,7 @@
 	visibility: hidden;
 	background-color: #fff;
 	font-family: sans-serif;
-	font-size: 10px;
+	font-size: 11px;
 	padding: 2px;
 	/*box-shadow: 0px 0px 0px #000;*/
 	/*border: 0px solid grey;*/
@@ -24,10 +24,15 @@
 	fill: rgba(0,0,0,0.1);
 }
 
-.q0-9 { fill: rgb(222,235,247); }
+/*.q0-9 { fill: rgb(222,235,247); }
 .q1-9 { fill: rgb(158,202,225); }
 .q2-9 { fill: rgb(66,146,198); }
-.q3-9 { fill: rgb(8,81,156); }
+.q3-9 { fill: rgb(8,81,156); }*/
+
+.q0-9 { fill: #b1ddff; }
+.q1-9 { fill: #0092ff; }
+.q2-9 { fill: #ffd3b1; }
+.q3-9 { fill: #ff6d00; }
 
 </style>
 
@@ -44,15 +49,28 @@ var width = 760.
 var rateById = d3.map();
 var rateByState = d3.map();
 
-var quantize = d3.scale.quantize()
-	// .domain([0, .15])
-	.domain([20, 35])
-	.range(d3.range(4).map(function(i) { return "q"+i+"-9"}));
+// var quantize = d3.scale.quantize()
+// 	// .domain([0, .15])
+// 	.domain([20, 35])
+// 	.range(d3.range(4).map(function(i) { return "q"+i+"-9"}));
 
+function quantize(t) {
+	var bmiStatus;
+  	if(t <= 18.5) {
+    	bmiStatus = "q0-9";//"Underweight";
+  	} else if(t > 18.5 && t <= 25) {
+    	bmiStatus = "q1-9";//"Normal status";
+  	} else if(t > 25 && t < 30) {
+    	bmiStatus = "q2-9";//"Overweight";
+  	} else if(t >= 30) {
+    	bmiStatus = "q3-9";//"Obesity";
+  	}	
+  	return bmiStatus;
+}
 
 var projection = d3.geo.albersUsa()
-	.scale(600)
-	.translate([400, 200]);
+	.scale(width)
+	.translate([width/2, height/2]);
 
 var path = d3.geo.path()
 	.projection(projection);
@@ -86,28 +104,27 @@ function ready(error, us) {
 			.data(us.features) // geojson		
 		.enter().append("path")
 			.attr("class", function(d) {
-				// console.log(d.id+": "+rateById.get(d.id)+", "+quantize(rateById.get(d.id)));
 				// return quantize(rateById.get(d.id));
 				return quantize(rateByState.get(d.properties.name));
 			})
 			.attr("d", path)
 
-		// for tooltip
-	    .on("mouseover", function(d){
-	    	// console.log(d.properties.name);
-
-	      	// tooltip.text(d.properties.name+": " + rateById.get(d.id) );
-	      	tooltip.text(d.properties.name+": " + rateByState.get(d.properties.name) );
-	      	d3.select(this).style('stroke-width','2px');
-	      	d3.select(this).style('stroke','red');
-	      	tooltip.style("visibility", "visible");
-	    })
-	    .on("mousemove", function(){
-	      tooltip.style("top", (event.pageY-10)+"px").style("left",(event.pageX+10)+"px");})
-	    .on("mouseout", function(){
-	      d3.select(this).style('stroke-width','1px');
-	      d3.select(this).style('stroke','#000');
-	      tooltip.style("visibility", "hidden");});
+			// for tooltip
+		    .on("mouseover", function(d){
+		      	// tooltip.text(d.properties.name+": " + rateById.get(d.id) );
+		      	tooltip.text(d.properties.name+": " + rateByState.get(d.properties.name) );  	
+		      	this.style.stroke = "black"; 
+		      	// d3.select(this).style('stroke','#000');
+		      	// d3.select(this).style('stroke-width','2px');
+		      	tooltip.style("visibility", "visible");
+		    })
+		    .on("mousemove", function(){
+		      tooltip.style("top", (event.pageY-10)+"px").style("left",(event.pageX+10)+"px");})
+		    .on("mouseout", function(){
+		    	this.style.stroke = "white"; 
+		      // d3.select(this).style('stroke-width','1px');
+		      // d3.select(this).style('stroke','#fff');
+		      tooltip.style("visibility", "hidden");});
 }
 
 // d3.json("us-states.json", function(json) {
