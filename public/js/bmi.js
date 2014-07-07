@@ -1,8 +1,11 @@
 var margin = {top: 10, right: 0, bottom: 10, left: 0},
-    width = 220 - margin.left - margin.right,
+    width = parseInt(d3.select('#mybmiG').style('width'), 10),
+    width = width - margin.left - margin.right,
     height = 50 - margin.top - margin.bottom;
+    // width = 220 - margin.left - margin.right,
+    // height = 50 - margin.top - margin.bottom;
 
-var svg = d3.select("body").append("svg")
+var svg = d3.select("#mybmiG").append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
   .append("g")

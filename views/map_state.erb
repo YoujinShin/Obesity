@@ -4,7 +4,7 @@
 
 .states {
 	fill: none;
-	stroke: #fff;
+	stroke: #000;
 	stroke-linejoin: round;
 }
 
@@ -42,10 +42,13 @@ var width = 760.
 	height = 400;
 
 var rateById = d3.map();
+var rateByState = d3.map();
 
 var quantize = d3.scale.quantize()
-	.domain([0, .15])
+	// .domain([0, .15])
+	.domain([20, 35])
 	.range(d3.range(4).map(function(i) { return "q"+i+"-9"}));
+
 
 var projection = d3.geo.albersUsa()
 	.scale(600)
@@ -68,6 +71,10 @@ queue()
 	.defer(d3.tsv, "temp.tsv", function(d) {
 		rateById.set(d.id, +d.rate);
 	})
+	.defer(d3.tsv, "obesity_state_2011.tsv", function(d) {
+		// console.log(d);
+		rateByState.set(d.state, +d.rate);
+	})
 	.await(ready);
 
 function ready(error, us) {
@@ -80,7 +87,8 @@ function ready(error, us) {
 		.enter().append("path")
 			.attr("class", function(d) {
 				// console.log(d.id+": "+rateById.get(d.id)+", "+quantize(rateById.get(d.id)));
-				return quantize(rateById.get(d.id));
+				// return quantize(rateById.get(d.id));
+				return quantize(rateByState.get(d.properties.name));
 			})
 			.attr("d", path)
 
@@ -88,7 +96,8 @@ function ready(error, us) {
 	    .on("mouseover", function(d){
 	    	// console.log(d.properties.name);
 
-	      	tooltip.text(d.properties.name+": " + rateById.get(d.id) );
+	      	// tooltip.text(d.properties.name+": " + rateById.get(d.id) );
+	      	tooltip.text(d.properties.name+": " + rateByState.get(d.properties.name) );
 	      	d3.select(this).style('stroke-width','2px');
 	      	d3.select(this).style('stroke','red');
 	      	tooltip.style("visibility", "visible");
@@ -97,7 +106,7 @@ function ready(error, us) {
 	      tooltip.style("top", (event.pageY-10)+"px").style("left",(event.pageX+10)+"px");})
 	    .on("mouseout", function(){
 	      d3.select(this).style('stroke-width','1px');
-	      d3.select(this).style('stroke','#fff');
+	      d3.select(this).style('stroke','#000');
 	      tooltip.style("visibility", "hidden");});
 }
 
