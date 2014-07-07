@@ -1,6 +1,7 @@
 .states {
 	fill: none;
 	stroke: #fff;
+	stroke-width: 1px;
 	stroke-linejoin: round;
 }
 
@@ -10,8 +11,8 @@
 	visibility: hidden;
 	background-color: #fff;
 	font-family: sans-serif;
-	font-size: 11px;
-	padding: 2px;
+	font-size: 12px;
+	padding: 3px;
 	/*box-shadow: 0px 0px 0px #000;*/
 	/*border: 0px solid grey;*/
 }

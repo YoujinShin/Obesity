@@ -1,5 +1,5 @@
-var width = 760;
-	height = 400;
+var width = 600;
+	height = 310;
 
 var rateById = d3.map();
 var rateByState = d3.map();
@@ -30,9 +30,23 @@ var projection = d3.geo.albersUsa()
 var path = d3.geo.path()
 	.projection(projection);
 
-var svg = d3.select("body").append("svg")
+var svg = d3.select("#usbmiG").append("svg")
 	.attr("width", width)
 	.attr("height", height);
+
+// var color = d3.scale.category20().domain(d3.range(4));
+
+// var legend = svg.append("g")
+//     .attr("class", "legend")
+//     .attr("transform", "translate(" + ((width - color.domain().length * 24) / 2) + ",30)")
+//     .style("cursor", "pointer")
+//   .selectAll("rect")
+//     .data(color.domain())
+//   .enter().append("rect")
+//     .attr("x", function(d) { return d * 24; })
+//     .attr("width", 24 - 14)
+//     .attr("height", 24 - 14)
+//     .style("fill", color);
 
 var tooltip = d3.select("body")
 	.append("div")
@@ -45,7 +59,6 @@ queue()
 		rateById.set(d.id, +d.rate);
 	})
 	.defer(d3.tsv, "obesity_state_2011.tsv", function(d) {
-		// console.log(d);
 		rateByState.set(d.state, +d.rate);
 	})
 	.await(ready);

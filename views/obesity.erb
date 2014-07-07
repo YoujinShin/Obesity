@@ -1,18 +1,28 @@
 <!DOCTYPE html>
 <head>
 	<meta charset="utf-8">
-	<title>MY BMI</title>
+	<title>Fat & Foods</title>
 
 	<style>
 		body {
 			padding-top: 30px;
-			padding-left: 80px;
+			padding-left: 8%;
 			padding-right: 8%;
 			padding-bottom: 30px;
+      font-family: sans-serif;
+      font-size: 12px !important;
 		}
+    h1 {
+      font-size: 24px !important;
+      letter-spacing: 1px;
+    }
+    p {
+      font-size: 12px !important;
+      letter-spacing: 1px;
+    }
 		input[type=text]
 		{
-		    background-color: transparent; 
+		  background-color: transparent; 
 			border-style: solid; 
 			border-width: 0px 0px 1px 0px; 
 			border-color: black;
@@ -22,8 +32,12 @@
 			outline: 0;
 		}
 		form {
-			padding-top: 30px;
+      padding: 12px;
+			padding-top: 15px;
 		}
+    .form_design {
+      background-color: rgb(225,225,225);
+    }
 	</style>
 
 	<link href="/css/bootstrap.min.css" rel="stylesheet">
@@ -38,57 +52,62 @@
 <script src="http://d3js.org/queue.v1.min.js"></script>
 <script src="http://d3js.org/topojson.v1.min.js"></script>
 
-<h1> BMI </h1> 
+<h1> Fat & Foods </h1> 
 
-<br><p>Calculate Your Body Mass Index</p>
+<br>
+<p>You can measure your body fat based on your height and weight. It is called Body Mass Index (BMI).</p>
 
-<form class="form-horizontal" role="form">
+<form class="form-horizontal form_design" role="form" >
 
   <div class="form-group">
-    <label class="col-sm-1 control-label">Height</label>
-    <div class="col-sm-2">
-      <input type="text"  id="myheight" placeholder="                             (cm)">
+    <label class="col-sm-2 control-label" style="font-weight:normal;">Height (cm)</label>
+    <div class="col-sm-1">
+      <input type="text"  id="myheight" style="width:120px;">
     </div>
+
+    <label class="col-sm-2 control-label" style="font-weight:normal;">Weight (kg)</label>
+    <div class="col-sm-1">
+      <input type="text" id="myweight" style="width:120px;">
+    </div>
+
+<!--     <div class="col-sm-offset-1 col-sm-1">
+      <button onclick="getBMI()" type="button" class="btn btn-xs btn-default" style="padding-left:9px; padding-right:9px;">submit</button>
+    </div> -->
   </div>
 
+
+  <!-- <div class="form-group"></div> -->
+
   <div class="form-group">
-    <label class="col-sm-1 control-label">Weight</label>
-    <div class="col-sm-2">
-      <input type="text" id="myweight" placeholder="                             (kg)">
+    <div class="col-sm-offset-2 col-sm-1">
+      <button onclick="getBMI()" type="button" class="btn btn-xs btn-default" style="padding-left:10px; padding-right:10px;">submit</button>
     </div>
-  </div>
 
-  <div class="form-group">
-    <div class="col-sm-offset-1 col-sm-10">
-      <button onclick="getBMI()" type="button" class="btn btn-default" style="">Get BMI</button>
-    </div>
-  </div>
-
-  <div class="form-group"></div>
-
-  <div class="form-group">
-    <label class="col-sm-1 control-label"> BMI
+    <label class="col-sm-2 control-label">
+      BMI
     </label>
 
     <div class="col-sm-2">
       <input type="text" id="mybmi">
     </div>
+
+    <div class="col-sm-4">
+      <div id="mybmiStatus"></div>
+      <!-- <div id = "mybmiG"></div> -->
+    </div>
   </div>
 
-  <div class="form-group">
-  	<div class="col-sm-offset-1 col-sm-2">
-  		<div id = "mybmiG"></div>
-  		<p id="mybmiStatus"></p>
-  	</div>
-  </div>
 </form>
 
-
+<br>
+<div id = "mybmiG"></div>
+<div id = "usbmiG"></div>
+<p>The average BMI in United States</p>
 
 <script src="/js/bmi.js"></script>
 <script src="/js/us_obesity.js"></script>
 <link href="/css/us_obesity.css" rel="stylesheet">
-<!-- <script src="/js/bmi.js"></script> -->
+
 
 <!-- <label for="mybmi" style="position:absolute; left:55px; top:365px;"> BMI </label>
 <input type="text" id="mybmi" style="position:absolute; left:150px; top:360px;" required>  -->
