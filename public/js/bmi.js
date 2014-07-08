@@ -108,7 +108,7 @@ function drawrect() {
   var textu = svg2.append("text")
                   .attr("x", 0)
                   .attr("y", 22)
-                  .attr("font-size", "10px")
+                  .attr("font-size", "0.8em")
                   .text("Underweight")
                   .attr("fill", "grey");
   // normal status
@@ -124,7 +124,7 @@ function drawrect() {
   var textn = svg2.append("text")
                   .attr("x", x1)
                   .attr("y", 22)
-                  .attr("font-size", "10px")
+                  .attr("font-size", "0.8em")
                   .text("Normal")
                   .attr("fill", "grey");
   // over weight
@@ -140,7 +140,7 @@ function drawrect() {
   var textow = svg2.append("text")
                   .attr("x", x2)
                   .attr("y", 22)
-                  .attr("font-size", "10px")
+                  .attr("font-size", "0.8em")
                   .text("Overweight")
                   .attr("fill", "grey");
   // obesity
@@ -156,7 +156,7 @@ function drawrect() {
   var texto = svg2.append("text")
                   .attr("x", x3)
                   .attr("y", 22)
-                  .attr("font-size", "10px")
+                  .attr("font-size", "0.8em")
                   .text("Obesity")
                   .attr("fill", "grey");
 }

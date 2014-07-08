@@ -1,5 +1,6 @@
-var width = 600;
-	height = 310;
+// var width = 600;
+var width = parseInt(d3.select('#usbmiG').style('width'), 10),
+	height = width/2 + 20;
 
 var rateById = d3.map();
 var rateByState = d3.map();
