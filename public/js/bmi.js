@@ -51,14 +51,31 @@ function drawLine(t) {
                   .range([0, width2]);
 
     var tx = txScale( Math.max(0+0.0, Math.min(maxWidth-0.0, t)) );
+    if(tx === "NaN") {
+      tx = 0;
+    }
 
-     var bmiline = svg2.append("circle")
-      .attr("cx", tx)
-      .attr("cy", 2)
-      .attr("r", 6)
-      .attr("stroke", "rgb(100,100,100)")
-      .attr("stroke-width", 1)
-      .style("fill", 'rgba(0,0,0,0.13)'); 
+    var bmiline = svg2.append("image")
+         .attr('x',tx-7)
+         .attr('y',-18)
+         .attr('width', 14)
+         .attr('height', 14)
+         .attr("xlink:href","/img/t_black.png");
+
+    var textline = svg2.append("text")
+         .attr("x", tx + 10)
+         .attr("y", -10)
+         .attr("font-size", "0.82em")
+         .text("You")
+         .attr("fill", "black");
+
+       // var bmiline = svg2.append("circle")
+        // .attr("cx", tx)
+        // .attr("cy", 2)
+        // .attr("r", 6)
+        // .attr("stroke", "rgb(100,100,100)")
+        // .attr("stroke-width", 1)
+        // .style("fill", 'rgba(0,0,0,0.13)'); 
 
     // var bmiline = svg2.append("line")
     //   .attr("x1", tx)
