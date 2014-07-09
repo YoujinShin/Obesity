@@ -80,7 +80,7 @@ function ready(error, us) {
 			// for tooltip
 	    .on("mouseover", function(d){
 	      	// tooltip.text(d.properties.name+": " + rateById.get(d.id) );
-	      	tooltip.text(d.properties.name+": " + rateByState.get(d.properties.name) );  	
+	      	tooltip.text(d.properties.name+" - " + rateByState.get(d.properties.name) );  	
 	      	this.style.stroke = "black"; 
 	      	// d3.select(this).style('stroke','#000');
 	      	// d3.select(this).style('stroke-width','2px');

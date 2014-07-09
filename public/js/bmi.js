@@ -42,7 +42,7 @@ function showText(t) {
   } else if(t >= 30) {
     bmiStatus = "Obesity";
   }
-  document.getElementById("mybmiStatus").innerHTML  = bmiStatus;
+  document.getElementById("mybmiStatus").innerHTML  = ">> You are in " + bmiStatus;
 }
 
 function drawLine(t) {
@@ -63,8 +63,8 @@ function drawLine(t) {
          .attr("xlink:href","/img/t_black.png");
 
     var textline = svg2.append("text")
-         .attr("x", tx + 10)
-         .attr("y", -10)
+         .attr("x", tx + 11)
+         .attr("y", -6)
          .attr("font-size", "0.82em")
          .text("You")
          .attr("fill", "black");

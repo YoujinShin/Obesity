@@ -14,11 +14,12 @@
       /*font-size: 1.1em !important;*/
 		}
     h1 {
-      font-size: 5em !important;
+      font-size: 3em !important;
       letter-spacing: 1px;
+      color:rgb(185,185,185) !important;
     }
     p {
-      font-size: 0.97em !important;
+      font-size: 0.96em !important;
       letter-spacing: 1px;
     }
     label {
@@ -40,7 +41,7 @@
 			padding-top: 12px;
 		}
     .form_design {
-      background-color: rgb(240,240,240);
+      background-color: rgb(243,243,243);
     }
 	</style>
 
@@ -56,9 +57,12 @@
 <script src="http://d3js.org/queue.v1.min.js"></script>
 <script src="http://d3js.org/topojson.v1.min.js"></script>
 
+<!-- <h1 style="background-color:black;">.</h1> -->
 <h1> Fat & Food </h1> 
 
-<p style="padding-top:24px; padding-bottom:4px;">You can measure your body fat based on your height and weight. It is called Body Mass Index (BMI).</p>
+<p style="padding-top:24px; padding-bottom:4px;"> 
+  <span style="font-weight:bold;">Your body fat  </span> 
+  can be measured based on your height and weight.  It is called Body Mass Index (BMI).  Compare it with the US statistics.</p>
 
 <form class="form-horizontal form_design" role="form" >
 
@@ -95,7 +99,7 @@
     </div>
 
     <div class="col-sm-4">
-      <div id="mybmiStatus" style="font-weight:normal; font-size:1.2em; color:black;"></div>
+      <div id="mybmiStatus" style="font-weight:normal; color:black; font-size: 0.9em"></div>
       <!-- <div id = "mybmiG"></div> -->
     </div>
   </div>
@@ -106,12 +110,13 @@
 <div id = "mybmiG"></div>
 <!-- <div id = "usbmiG"></div> -->
 
-<!-- <p style="padding-top:24px; padding-bottom:4px;">Let's find yours and compare it with the US.</p> -->
+<!-- <p style="padding-top:20px; padding-bottom:0px;"> 
+  <span style="font-weight:bold;">America's fat</span></p> -->
 
 <div class="form-group">
   <div class="col-sm-6">
     <div id = "usbmiG"></div> 
-    <p style="text-align: center;">The average BMI in United States</p>
+    <p style="text-align:left; padding:12px; font-weight:bold;">The average body fat data in each state in 2011</p>
   </div>
 </div>
 
