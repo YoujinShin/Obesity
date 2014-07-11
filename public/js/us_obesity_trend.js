@@ -23,7 +23,7 @@ var rateByState_2010 = d3.map();
 var rateByState_2011 = d3.map();
 var rateByState_2012 = d3.map();
 
-var year = 2008;
+var year = 2012;
 
 function quantize(t) {
 	var bmiStatus;
@@ -33,13 +33,12 @@ function quantize(t) {
 		bmiStatus = "q1-9";//"Normal status";
 	} else if(t > 20 && t < 25) {
 		bmiStatus = "q2-9";//"Overweight";
-  	} else if(t >= 25 && t < 30) {
-  		bmiStatus = "q3-9";//"Obesity";
-  	} else if(t >= 30) {
-  		bmiStatus = "q4-9";//"Obesity";
-  	}		
-
-  	return bmiStatus;
+	} else if(t >= 25 && t < 30) {
+		bmiStatus = "q3-9";//"Obesity";
+	} else if(t >= 30) {
+		bmiStatus = "q4-9";//"Obesity";
+	}
+	return bmiStatus;
 }
 
 var projection = d3.geo.albersUsa()
@@ -60,6 +59,7 @@ var tooltip = d3.select("body")
 queue()
 	// .defer(d3.json, "us.json") // topojson
 	.defer(d3.json, "us-states.json") // geojson
+
 	.defer(d3.tsv, "obesity_state_1995.tsv", function(d) { rateByState_1995.set(d.state,+d._1995); })
 	.defer(d3.tsv, "obesity_state_1996.tsv", function(d) { rateByState_1996.set(d.state,+d._1996); })
 	.defer(d3.tsv, "obesity_state_1997.tsv", function(d) { rateByState_1997.set(d.state,+d._1997); })
@@ -71,11 +71,12 @@ queue()
 	.defer(d3.tsv, "obesity_state_2002.tsv", function(d) { rateByState_2002.set(d.state,+d._2002); })
 	.defer(d3.tsv, "obesity_state_2003.tsv", function(d) { rateByState_2003.set(d.state,+d._2003); })
 	.defer(d3.tsv, "obesity_state_2004.tsv", function(d) { rateByState_2004.set(d.state,+d._2004); })
+	
 	.defer(d3.tsv, "obesity_state_2005.tsv", function(d) { rateByState_2005.set(d.state,+d._2005); })
-
 	.defer(d3.tsv, "obesity_state_2006.tsv", function(d) { rateByState_2006.set(d.state,+d._2006); })
 	.defer(d3.tsv, "obesity_state_2007.tsv", function(d) { rateByState_2007.set(d.state,+d._2007); })
 	.defer(d3.tsv, "obesity_state_2008.tsv", function(d) { rateByState_2008.set(d.state,+d._2008); })
+	.defer(d3.tsv, "obesity_state_2009.tsv", function(d) { rateByState_2009.set(d.state,+d._2009); })
 
 	.defer(d3.tsv, "obesity_state_2010.tsv", function(d) { rateByState_2010.set(d.state,+d._2010); })
 	.defer(d3.tsv, "obesity_state_2011.tsv", function(d) { rateByState_2011.set(d.state,+d._2011); })
@@ -106,11 +107,12 @@ function ready(error, us) {
 				if(year === 2002) tempData = quantize(rateByState_2002.get(d.properties.name));
 				if(year === 2003) tempData = quantize(rateByState_2003.get(d.properties.name));
 				if(year === 2004) tempData = quantize(rateByState_2004.get(d.properties.name));
-				if(year === 2005) tempData = quantize(rateByState_2005.get(d.properties.name));
 
+				if(year === 2005) tempData = quantize(rateByState_2005.get(d.properties.name));
 				if(year === 2006) tempData = quantize(rateByState_2006.get(d.properties.name));
 				if(year === 2007) tempData = quantize(rateByState_2007.get(d.properties.name));
 				if(year === 2008) tempData = quantize(rateByState_2008.get(d.properties.name));
+				if(year === 2009) tempData = quantize(rateByState_2009.get(d.properties.name));
 
 				if(year === 2010) tempData = quantize(rateByState_2010.get(d.properties.name));
 				if(year === 2011) tempData = quantize(rateByState_2011.get(d.properties.name));
@@ -120,6 +122,7 @@ function ready(error, us) {
 			.attr("d", path)// for tooltip
 			.on("mouseover", function(d){
 				var tempText;
+
 				if(year === 1995) tempText = tooltip.text(d.properties.name+" - "+rateByState_1995.get(d.properties.name)+"%");
 				if(year === 1996) tempText = tooltip.text(d.properties.name+" - "+rateByState_1996.get(d.properties.name)+"%");
 				if(year === 1997) tempText = tooltip.text(d.properties.name+" - "+rateByState_1997.get(d.properties.name)+"%");
@@ -131,11 +134,12 @@ function ready(error, us) {
 				if(year === 2002) tempText = tooltip.text(d.properties.name+" - "+rateByState_2002.get(d.properties.name)+"%");
 				if(year === 2003) tempText = tooltip.text(d.properties.name+" - "+rateByState_2003.get(d.properties.name)+"%");
 				if(year === 2004) tempText = tooltip.text(d.properties.name+" - "+rateByState_2004.get(d.properties.name)+"%");
-				if(year === 2005) tempText = tooltip.text(d.properties.name+" - "+rateByState_2005.get(d.properties.name)+"%");
 
+				if(year === 2005) tempText = tooltip.text(d.properties.name+" - "+rateByState_2005.get(d.properties.name)+"%");
 				if(year === 2006) tempText = tooltip.text(d.properties.name+" - "+rateByState_2006.get(d.properties.name)+"%");
 				if(year === 2007) tempText = tooltip.text(d.properties.name+" - "+rateByState_2007.get(d.properties.name)+"%");
 				if(year === 2008) tempText = tooltip.text(d.properties.name+" - "+rateByState_2008.get(d.properties.name)+"%");
+				if(year === 2009) tempText = tooltip.text(d.properties.name+" - "+rateByState_2009.get(d.properties.name)+"%");
 
 				if(year === 2010) tempText = tooltip.text(d.properties.name+" - "+rateByState_2010.get(d.properties.name)+"%");
 				if(year === 2011) tempText = tooltip.text(d.properties.name+" - "+rateByState_2011.get(d.properties.name)+"%");
@@ -157,7 +161,6 @@ function ready(error, us) {
           .attr("x", width/2-40)
           .attr("y", 40)
           .attr("font-size", "2.4em")
-          // .style("z-index", 10)
           .text(year)
           .attr("fill", "black");
 }
