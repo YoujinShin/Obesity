@@ -1,14 +1,9 @@
 // var width = 600;
 var width = parseInt(d3.select('#usbmiG').style('width'), 10),
-	height = width/2 + 20;
+	height = width/2 + 40;
 
 var rateById = d3.map();
 var rateByState = d3.map();
-
-// var quantize = d3.scale.quantize()
-// 	// .domain([0, .15])
-// 	.domain([20, 35])
-// 	.range(d3.range(4).map(function(i) { return "q"+i+"-9"}));
 
 function quantize(t) {
 	var bmiStatus;
@@ -25,8 +20,8 @@ function quantize(t) {
 }
 
 var projection = d3.geo.albersUsa()
-	.scale(width)
-	.translate([width/2, height/2]);
+	.scale(width*1.2)
+	.translate([width*0.5, height/2]);
 
 var path = d3.geo.path()
 	.projection(projection);
@@ -92,5 +87,11 @@ function ready(error, us) {
 	    	this.style.stroke = "white"; 
 	      // d3.select(this).style('stroke-width','1px');
 	      // d3.select(this).style('stroke','#fff');
-	      tooltip.style("visibility", "hidden");});
+	      tooltip.style("visibility", "hidden");})
+	    .on("click", function(d) {
+	    	// stateLine(d);
+	    	// stateBMI( d.properties.name, rateByState.get(d.properties.name) );
+	    	// console.log(d.properties.name);
+	    });
 }
+

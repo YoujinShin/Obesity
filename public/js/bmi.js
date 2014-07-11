@@ -1,7 +1,7 @@
 var margin = {top: 24, right: 0, bottom: 8, left: 0},
     width2 = parseInt(d3.select('#mybmiG').style('width'), 10),
     width2 = width2 - margin.left - margin.right,
-    height2 = 70 - margin.top - margin.bottom;
+    height2 = 60 - margin.top - margin.bottom;
     // width = 220 - margin.left - margin.right,
     // height = 50 - margin.top - margin.bottom;
 
@@ -15,6 +15,9 @@ var svg2 = d3.select("#mybmiG").append("svg")
 var maxWidth = 50;
 drawrect();
 
+var bmiStatus;
+var bmiValue;
+
 
 function getBMI() {
   var temph = document.getElementById("myheight").value;
@@ -22,17 +25,49 @@ function getBMI() {
   var tempbmi = d3.format(".2f")(tempw/(temph * temph / 10000));
 
   tempbmi = Math.max(0, Math.min(tempbmi, maxWidth));
+  bmiValue = tempbmi;
 
-  document.getElementById("mybmi").value = tempbmi;
+  // document.getElementById("mybmi").value = tempbmi;
 
   drawrect();
-  drawLine(tempbmi);
   showText(tempbmi);
+  drawLine(tempbmi);
+}
+
+
+function stateLine(t) {
+  drawrect();
+
+  var sBMI = rateByState.get(t.properties.name);
+  var sName = t.properties.name;
+
+  var txScale = d3.scale.linear()
+                  .domain([0, maxWidth])
+                  .range([0, width2]);
+
+    var tx = txScale( Math.max(0+0.0, Math.min(maxWidth-0.0, sBMI)) );
+    if(tx === "NaN") {
+      tx = 0;
+    }
+
+    var bmiline = svg2.append("image")
+         .attr('x',tx-7)
+         .attr('y',-18)
+         .attr('width', 14)
+         .attr('height', 14)
+         .attr("xlink:href","/img/t_black.png");
+
+    var textline = svg2.append("text")
+         .attr("x", tx + 11)
+         .attr("y", -6)
+         .attr("font-size", "0.82em")
+         .text(sName)
+         .attr("fill", "black");
 }
 
 
 function showText(t) {
-  var bmiStatus;
+  // var bmiStatus;
   if(t <= 18.5) {
     bmiStatus = "Underweight";
   } else if(t > 18.5 && t <= 25) {
@@ -42,7 +77,7 @@ function showText(t) {
   } else if(t >= 30) {
     bmiStatus = "Obesity";
   }
-  document.getElementById("mybmiStatus").innerHTML  = ">> You are in " + bmiStatus;
+  // document.getElementById("mybmiStatus").innerHTML  = ">> You are in " + bmiStatus;
 }
 
 function drawLine(t) {
@@ -63,10 +98,10 @@ function drawLine(t) {
          .attr("xlink:href","/img/t_black.png");
 
     var textline = svg2.append("text")
-         .attr("x", tx + 11)
-         .attr("y", -6)
-         .attr("font-size", "0.82em")
-         .text("You")
+         .attr("x", tx + 14)
+         .attr("y", -10)
+         .attr("font-size", "0.9em")
+         .text("Your BMI: "+bmiValue)
          .attr("fill", "black");
 
        // var bmiline = svg2.append("circle")
@@ -124,10 +159,11 @@ function drawrect() {
 
   var textu = svg2.append("text")
                   .attr("x", 0)
-                  .attr("y", 22)
+                  .attr("y", 20)
                   .attr("font-size", "0.82em")
                   .text("Underweight")
                   .attr("fill", "grey");
+
   // normal status
   var normalw = svg2.append("rect")
                   .attr("x", x1)
@@ -140,7 +176,7 @@ function drawrect() {
 
   var textn = svg2.append("text")
                   .attr("x", x1)
-                  .attr("y", 22)
+                  .attr("y", 20)
                   .attr("font-size", "0.82em")
                   .text("Normal")
                   .attr("fill", "grey");
@@ -156,7 +192,7 @@ function drawrect() {
 
   var textow = svg2.append("text")
                   .attr("x", x2)
-                  .attr("y", 22)
+                  .attr("y", 20)
                   .attr("font-size", "0.82em")
                   .text("Overweight")
                   .attr("fill", "grey");
@@ -172,9 +208,24 @@ function drawrect() {
 
   var texto = svg2.append("text")
                   .attr("x", x3)
-                  .attr("y", 22)
+                  .attr("y", 20)
                   .attr("font-size", "0.82em")
                   .text("Obesity")
+                  .attr("fill", "grey");
+
+  // range
+  var text_min = svg2.append("text")
+                  .attr("x", 0)
+                  .attr("y", -10)
+                  .attr("font-size", "0.82em")
+                  .text("0")
+                  .attr("fill", "grey");
+
+  var text_max = svg2.append("text")
+                  .attr("x", x4-15)
+                  .attr("y", -10)
+                  .attr("font-size", "0.82em")
+                  .text("50")
                   .attr("fill", "grey");
 }
 
