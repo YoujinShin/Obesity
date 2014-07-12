@@ -36,11 +36,11 @@
 			outline: 0;
 		}
 		form {
-      padding: 4px;
-			padding-top: 10px;
+      padding: 2px;
+			padding-top: 6px;
 		}
     .form_design {
-      background-color: rgb(243,243,243);
+      background-color: rgb(249,249,249);
     }
     circle,
     .line {
@@ -103,14 +103,39 @@
   </div>
 </form>
 
-<br>
 <!--  -->
+<br>
 <div id = "mybmiG"></div>
+
+<!--  -->
+<br>
+<p><span style="font-weight:bold;">Percent of Obese (BMI >30) in U.S.</span>
+during 1995 - 2012</p>
+
 
 <!--  -->
 <form class="form-horizontal" role="form" >
   <div class="form-group">
-    <label class="col-sm-2 control-label" style="font-weight:normal;">Year: </label>
+      <!-- <div class="form-group"> -->
+<!--     <label class="col-sm-2 control-label" style="font-weight:normal;">Year: </label> -->
+    <div class="col-sm-1">
+      <input type="text"  id="myyear" style="width:120px; border-width: 0px 0px 0px 0px; ">
+    </div>
+
+    <div class="col-sm-1">
+      <button onclick="getYear()" type="button" class="btn btn-xs btn-default" style="padding-left:10px; padding-right:10px;">submit</button>
+    </div>
+  <!-- </div> -->
+
+    <div class="col-sm-5">
+      <div id = "usbmiG"></div> 
+    </div>
+  </div>
+</form>
+
+
+<!-- <form class="form-horizontal" role="form" >
+  <div class="form-group">
     <div class="col-sm-1">
       <input type="text"  id="myyear" style="width:120px;">
     </div>
@@ -119,15 +144,9 @@
       <button onclick="getYear()" type="button" class="btn btn-xs btn-default" style="padding-left:10px; padding-right:10px;">submit</button>
     </div>
   </div>
-</form>
+</form> -->
 
-<!--  -->
-<div class="form-group">
-  <div class="col-sm-6">
-    <div id = "usbmiG"></div> 
-    <p style="text-align:center; padding:12px; font-weight:bold;">Percent of Obese (BMI >30) in U.S.</p>
-  </div>
-</div>
+
 
 <!--  -->
 <script src="/js/bmi.js"></script>

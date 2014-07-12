@@ -1,7 +1,7 @@
 var margin = {top: 24, right: 0, bottom: 8, left: 0},
     width2 = parseInt(d3.select('#mybmiG').style('width'), 10),
     width2 = width2 - margin.left - margin.right,
-    height2 = 60 - margin.top - margin.bottom;
+    height2 = 68 - margin.top - margin.bottom;
     // width = 220 - margin.left - margin.right,
     // height = 50 - margin.top - margin.bottom;
 
@@ -103,23 +103,6 @@ function drawLine(t) {
          .attr("font-size", "0.9em")
          .text("Your BMI: "+bmiValue)
          .attr("fill", "black");
-
-       // var bmiline = svg2.append("circle")
-        // .attr("cx", tx)
-        // .attr("cy", 2)
-        // .attr("r", 6)
-        // .attr("stroke", "rgb(100,100,100)")
-        // .attr("stroke-width", 1)
-        // .style("fill", 'rgba(0,0,0,0.13)'); 
-
-    // var bmiline = svg2.append("line")
-    //   .attr("x1", tx)
-    //   .attr("x2", tx)
-    //   .attr("y1", -10)
-    //   .attr("y2", 0)
-    //   .attr("stroke", "#000")
-    //   .attr("stroke-width", 4)
-    //   .style("opacity", 1); 
 }
 
 
@@ -135,7 +118,7 @@ function drawrect() {
 
   var g = 0;
   var h2 = 0;
-  var h = 3;
+  var h = 2;
 
   var bg = svg2.append("rect")
                   .attr("x", - margin.left)
@@ -152,7 +135,8 @@ function drawrect() {
                   .attr("y", h2+g)
                   .attr("width", x1)
                   .attr("height", h)
-                  .style("fill", "#b1ddff")
+                  // .style("fill", "#b1ddff")
+                  .style("fill", "rgb(220,220,220)")
                 // .append("line")
                   .attr("stroke-width", 1)
                   .attr("stroke", "white");
@@ -170,7 +154,8 @@ function drawrect() {
                   .attr("y", h2+g)
                   .attr("width", x2-x1)
                   .attr("height", h)
-                  .style("fill", "#0092ff")
+                  // .style("fill", "#0092ff")
+                  .style("fill", "rgb(100,100,100)")
                   .attr("stroke-width", 1)
                   .attr("stroke", "white");
 
@@ -186,7 +171,8 @@ function drawrect() {
                   .attr("y", h2+g)
                   .attr("width", x3-x2)
                   .attr("height", h)
-                  .style("fill", "#ffd3b1")//#0092ff")
+                  .style("fill", "rgb(220,220,220)")
+                  // .style("fill", "#ffd3b1")//#0092ff")
                   .attr("stroke-width", 1)
                   .attr("stroke", "white");
 
@@ -202,7 +188,8 @@ function drawrect() {
                   .attr("y", h2+g)
                   .attr("width", x4-x3)
                   .attr("height", h)
-                  .style("fill", "#ff6d00")//"#ff0f00")
+                  .style("fill", "rgb(100,100,100)")
+                  // .style("fill", "#ff6d00")//"#ff0f00")
                   .attr("stroke-width", 1)
                   .attr("stroke", "white");
 
@@ -228,9 +215,3 @@ function drawrect() {
                   .text("50")
                   .attr("fill", "grey");
 }
-
-// $( document ).ready(function() {
-//   $('input[id="myheight"]').change(function(){
-//     console.log( document.getElementById('myheight').value );
-//   });
-// });

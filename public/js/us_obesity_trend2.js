@@ -1,10 +1,10 @@
 // var width = 600;
 var width = parseInt(d3.select('#usbmiG').style('width'), 10),
-	height = width*0.6;
+	height = width*0.54;
 
 var rateByState = d3.map();
 
-var year = 1995;
+var year = 2012;
 var clicked = 0 ;
 
 function quantize(t) {
@@ -24,8 +24,8 @@ function quantize(t) {
 }
 
 var projection = d3.geo.albersUsa()
-	.scale(width*1.2)
-	.translate([width*0.5, height/2+15]);
+	.scale(width*1.1)
+	.translate([width*0.5, height*0.5]);
 
 var path = d3.geo.path()
 	.projection(projection);
@@ -55,7 +55,9 @@ function ready(error, us) {
 	obesity = svg.append("g")
 			.attr("class", "states")
 			.selectAll("path")
-				.data(us.features) // geojson	
+				.data(us.features) // geojson
+
+	document.getElementById("myyear").value = year;
 
 	obesity.enter().append("path")
 				.attr("class", function(d) {
