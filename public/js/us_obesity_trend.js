@@ -1,6 +1,6 @@
 // var width = 600;
 var width = parseInt(d3.select('#usbmiG').style('width'), 10),
-	height = width/2 + 75;
+	height = width*0.6;
 
 var rateByState_1995 = d3.map();
 var rateByState_1996 = d3.map();
@@ -23,7 +23,9 @@ var rateByState_2010 = d3.map();
 var rateByState_2011 = d3.map();
 var rateByState_2012 = d3.map();
 
-var year = 2012;
+var year = 2011;
+
+var clicked = 0 ;
 
 function quantize(t) {
 	var bmiStatus;
@@ -84,6 +86,14 @@ queue()
 	.await(ready);
 
 function ready(error, us) {
+	console.log("ready");
+	console.log(year);
+
+	// if(clicked === 1) {
+	//  	var svg = d3.select("#usbmiG").append("svg")
+	// 	.attr("width", width)
+	// 	.attr("height", height);
+	// }
 
 	svg.append("g")
 			.attr("class", "states")
@@ -96,6 +106,9 @@ function ready(error, us) {
 			})
 			.attr("class", function(d) {
 				var tempData;
+				// var tempYear = "rateByState_"+year;
+				// console.log(tempYear);
+				// tempData = quantize(tempYear.get(d.properties.name));
 				if(year === 1995) tempData = quantize(rateByState_1995.get(d.properties.name));
 				if(year === 1996) tempData = quantize(rateByState_1996.get(d.properties.name));
 				if(year === 1997) tempData = quantize(rateByState_1997.get(d.properties.name));
@@ -117,6 +130,7 @@ function ready(error, us) {
 				if(year === 2010) tempData = quantize(rateByState_2010.get(d.properties.name));
 				if(year === 2011) tempData = quantize(rateByState_2011.get(d.properties.name));
 				if(year === 2012) tempData = quantize(rateByState_2012.get(d.properties.name));
+				
 				return tempData;
 			})
 			.attr("d", path)// for tooltip
@@ -157,11 +171,25 @@ function ready(error, us) {
 
 			});
 
-	var text_year = svg.append("text")
-          .attr("x", width/2-40)
-          .attr("y", 40)
-          .attr("font-size", "2.4em")
-          .text(year)
-          .attr("fill", "black");
+	// var text_year = svg.append("text")
+ //          .attr("x", width/2-40)
+ //          .attr("y", 40)
+ //          .attr("font-size", "2.4em")
+ //          .text(year)
+ //          .attr("fill", "black");
 }
 
+function getYear() {
+	year = document.getElementById("myyear").value;
+	// console.log(year);
+
+	d3.select("svg")
+       .remove();
+
+     clicked = 1;
+
+	queue()
+		.defer(d3.json, "us-states.json") 
+		.defer(d3.tsv, "obesity_state_1995.tsv", function(d) { rateByState_1995.set(d.state,+d._1995); })
+		.await(ready);
+}

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <head>
 	<meta charset="utf-8">
-	<title>Fat & Food</title>
+	<title>BMI</title>
 
 	<style>
 		body {
@@ -42,6 +42,23 @@
     .form_design {
       background-color: rgb(243,243,243);
     }
+    circle,
+    .line {
+      fill: none;
+      stroke: grey;
+      stroke-width: 1.5px;
+    }
+
+    circle {
+      fill: #fff;
+      fill-opacity: .2;
+      /*cursor: move;*/
+    }
+
+    .selected {
+      fill: #ff7f0e;
+      stroke: #ff7f0e;
+    }
 	</style>
 
 	<link href="/css/bootstrap.min.css" rel="stylesheet">
@@ -57,7 +74,7 @@
 <script src="http://d3js.org/topojson.v1.min.js"></script>
 
 <!-- <h1 style="background-color:black;">.</h1> -->
-<h1> Fat & Food </h1> 
+<h1> Body Fat</h1> 
 
 <p style="padding-top:24px; padding-bottom:4px;"> 
   <span style="font-weight:bold;">Your body fat  </span> 
@@ -83,32 +100,28 @@
 <!--     <div class="col-sm-2">
       <input type="text" id="mybmi" style="width:120px;">
     </div> -->
-
   </div>
-
-<!--   <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-1">
-      <button onclick="getBMI()" type="button" class="btn btn-xs btn-default" style="padding-left:10px; padding-right:10px;">submit</button>
-    </div>
-
-    <label class="col-sm-2 control-label">
-      Your BMI
-    </label>
-
-    <div class="col-sm-2">
-      <input type="text" id="mybmi" style="width:120px;">
-    </div>
-
-    <div class="col-sm-4">
-      <div id="mybmiStatus" style="font-weight:normal; color:black; font-size: 0.9em"></div>
-    </div>
-  </div> -->
-
 </form>
 
 <br>
+<!--  -->
 <div id = "mybmiG"></div>
 
+<!--  -->
+<form class="form-horizontal" role="form" >
+  <div class="form-group">
+    <label class="col-sm-2 control-label" style="font-weight:normal;">Year: </label>
+    <div class="col-sm-1">
+      <input type="text"  id="myyear" style="width:120px;">
+    </div>
+
+    <div class="col-sm-offset-1 col-sm-1">
+      <button onclick="getYear()" type="button" class="btn btn-xs btn-default" style="padding-left:10px; padding-right:10px;">submit</button>
+    </div>
+  </div>
+</form>
+
+<!--  -->
 <div class="form-group">
   <div class="col-sm-6">
     <div id = "usbmiG"></div> 
@@ -116,11 +129,12 @@
   </div>
 </div>
 
-
+<!--  -->
 <script src="/js/bmi.js"></script>
-<script src="/js/us_obesity_trend.js"></script>
+<!-- <script src="/js/us_obesity_trend.js"></script> -->
+<script src="/js/us_obesity_trend2.js"></script>
 <!-- <script src="/js/us_obesity.js"></script> -->
 <link href="/css/us_obesity.css" rel="stylesheet">
-
+<!-- <script src="/js/year.js"></script> -->
 
 </body>
