@@ -5,7 +5,6 @@ var width = parseInt(d3.select('#usbmiG').style('width'), 10),
 var rateByState = d3.map();
 
 var year = 2012;
-var clicked = 0 ;
 
 function quantize(t) {
 	var bmiStatus;
@@ -42,9 +41,8 @@ var tempFile = "obesity_state_"+year+".tsv";
 
 queue()
 	.defer(d3.json, "us-states.json") // geojson
-	.defer(d3.tsv, tempFile, function(d) { 
-		rateByState.set(d.state,+d.rate); 
-	})
+	.defer(d3.tsv, tempFile, function(d) {
+		rateByState.set(d.state,+d.rate); })
 	.await(ready);
 
 var obesity;
@@ -55,7 +53,7 @@ function ready(error, us) {
 	obesity = svg.append("g")
 			.attr("class", "states")
 			.selectAll("path")
-				.data(us.features) // geojson
+				.data(us.features); // geojson
 
 	document.getElementById("myyear").value = year;
 
@@ -116,8 +114,7 @@ function getYear() {
 	tempFile = "obesity_state_"+year+".tsv";
 
 	queue()
-		.defer(d3.tsv, tempFile, function(d) { 
-			rateByState.set(d.state,+d.rate); 
-		})
+		.defer(d3.tsv, tempFile, function(d) {
+			rateByState.set(d.state,+d.rate); })
 		.await(change);
 }

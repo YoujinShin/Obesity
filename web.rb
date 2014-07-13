@@ -20,3 +20,7 @@ end
 get '/map_state' do
 	erb :map_state
 end
+
+get '/scatter' do
+	erb :scatter
+end
