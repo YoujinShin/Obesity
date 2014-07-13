@@ -10,7 +10,7 @@
 			padding-right: 9%;
 			padding-bottom: 24px;
       letter-spacing: 1px;
-      /*font-family: sans-serif;*/
+      font-family: sans-serif;
 		}
     h1 {
       font-size: 3em !important;
@@ -59,6 +59,23 @@
       fill: #ff7f0e;
       stroke: #ff7f0e;
     }
+
+    .axis path,
+    .axis line {
+      fill: none;
+      stroke: #fff;
+      /*shape-rendering: crispEdges;*/
+    }
+
+    .dot {
+      stroke: #fff;
+    }
+
+    .q0-9 { fill: #b1ddff; }
+    .q1-9 { fill: #0092ff; }
+    .q2-9 { fill: #ffd3b1; }
+    .q3-9 { fill: #ffb076; }
+    .q4-9 { fill: #ff6d00; }
 	</style>
 
 	<link href="/css/bootstrap.min.css" rel="stylesheet">
@@ -130,9 +147,13 @@ during 1995 - 2012</p>
     <div class="col-sm-5">
       <div id = "usbmiG"></div> 
     </div>
+
+    <div class="col-sm-4">
+      <div id = "scatterG"></div> 
+    </div>
+
   </div>
 </form>
-
 
 <!-- <form class="form-horizontal" role="form" >
   <div class="form-group">
@@ -147,7 +168,6 @@ during 1995 - 2012</p>
 </form> -->
 
 
-
 <!--  -->
 <script src="/js/bmi.js"></script>
 <!-- <script src="/js/us_obesity_trend.js"></script> -->
@@ -155,5 +175,5 @@ during 1995 - 2012</p>
 <!-- <script src="/js/us_obesity.js"></script> -->
 <link href="/css/us_obesity.css" rel="stylesheet">
 <!-- <script src="/js/year.js"></script> -->
-
+<script src="/js/barGraph.js"></script>
 </body>

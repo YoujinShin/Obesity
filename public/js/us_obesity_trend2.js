@@ -48,7 +48,7 @@ queue()
 var obesity;
 
 function ready(error, us) {
-	console.log(rateByState);
+	// console.log(rateByState);
 
 	obesity = svg.append("g")
 			.attr("class", "states")
