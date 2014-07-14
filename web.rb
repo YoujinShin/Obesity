@@ -24,3 +24,7 @@ end
 get '/scatter' do
 	erb :scatter
 end
+
+get '/area' do
+	erb :area
+end

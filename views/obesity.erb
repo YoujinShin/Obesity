@@ -10,7 +10,8 @@
 			padding-right: 9%;
 			padding-bottom: 24px;
       letter-spacing: 1px;
-      font-family: sans-serif;
+      font: 1.1em sans-serif !important;
+
 		}
     h1 {
       font-size: 3em !important;
@@ -18,11 +19,11 @@
       /*color:rgb(185,185,185) !important;*/
     }
     p {
-      font-size: 0.96em !important;
+      font-size: 1.2em !important;
       letter-spacing: 1px;
     }
     label {
-      font-size: 0.86em !important;
+      font-size: 1.0em !important;
     }
 		input[type=text]
 		{
@@ -42,18 +43,6 @@
     .form_design {
       background-color: rgb(249,249,249);
     }
-    circle,
-    .line {
-      fill: none;
-      stroke: grey;
-      stroke-width: 1.5px;
-    }
-
-    circle {
-      fill: #fff;
-      fill-opacity: .2;
-      /*cursor: move;*/
-    }
 
     .selected {
       fill: #ff7f0e;
@@ -62,13 +51,14 @@
 
     .axis path,
     .axis line {
+      /*font: 9px sans-serif;*/
       fill: none;
-      stroke: #fff;
+      stroke: grey;
       /*shape-rendering: crispEdges;*/
     }
 
     .dot {
-      stroke: #fff;
+      stroke: none;
     }
 
     .q0-9 { fill: #b1ddff; }
@@ -125,7 +115,7 @@
 <div id = "mybmiG"></div>
 
 <!--  -->
-<br>
+<br><br>
 <p><span style="font-weight:bold;">Percent of Obese (BMI >30) in U.S.</span>
 during 1995 - 2012</p>
 
@@ -136,19 +126,23 @@ during 1995 - 2012</p>
       <!-- <div class="form-group"> -->
 <!--     <label class="col-sm-2 control-label" style="font-weight:normal;">Year: </label> -->
     <div class="col-sm-1">
-      <input type="text"  id="myyear" style="width:120px; border-width: 0px 0px 0px 0px; ">
+      <br><br>
+      <input type="text"  id="myyear" style="width:120px; border-width: 0px 0px 0px 0px; font-size: 34px; letter-spacing:2px;"> 
+      <br><br>
+      <button onclick="getYear()" type="button" class="btn btn-xs btn-default" style="padding-left:10px; padding-right:10px;">year</button>
     </div>
 
-    <div class="col-sm-1">
-      <button onclick="getYear()" type="button" class="btn btn-xs btn-default" style="padding-left:10px; padding-right:10px;">submit</button>
-    </div>
+<!--     <div class="col-sm-1">
+      <button onclick="getYear()" type="button" class="btn btn-xs btn-default" style="padding-left:10px; padding-right:10px;">year</button>
+    </div> -->
+
   <!-- </div> -->
 
     <div class="col-sm-5">
       <div id = "usbmiG"></div> 
     </div>
 
-    <div class="col-sm-4">
+    <div class="col-sm-6">
       <div id = "scatterG"></div> 
     </div>
 
@@ -170,10 +164,11 @@ during 1995 - 2012</p>
 
 <!--  -->
 <script src="/js/bmi.js"></script>
+<script src="/js/barGraph.js"></script>
 <!-- <script src="/js/us_obesity_trend.js"></script> -->
 <script src="/js/us_obesity_trend2.js"></script>
 <!-- <script src="/js/us_obesity.js"></script> -->
 <link href="/css/us_obesity.css" rel="stylesheet">
 <!-- <script src="/js/year.js"></script> -->
-<script src="/js/barGraph.js"></script>
+
 </body>

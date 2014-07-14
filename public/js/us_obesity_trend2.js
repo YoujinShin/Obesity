@@ -1,6 +1,6 @@
 // var width = 600;
 var width = parseInt(d3.select('#usbmiG').style('width'), 10),
-	height = width*0.54;
+	height = width*0.58;
 
 var rateByState = d3.map();
 
@@ -24,7 +24,7 @@ function quantize(t) {
 
 var projection = d3.geo.albersUsa()
 	.scale(width*1.1)
-	.translate([width*0.5, height*0.5]);
+	.translate([width*0.5, height*0.58]);
 
 var path = d3.geo.path()
 	.projection(projection);
