@@ -109,7 +109,51 @@ function change() {
 }
 
 function getYear() {
+
 	year = document.getElementById("myyear").value;
+	tempFile = "obesity_state_"+year+".tsv";
+
+	makeScatter();
+
+	queue()
+		.defer(d3.tsv, tempFile, function(d) {
+			rateByState.set(d.state,+d.rate); })
+		.await(change);
+}
+
+function getYearLeft() {
+	
+	year = document.getElementById("myyear").value;
+	if(year > 1995) {
+		year = year - 1;
+	} else {
+		year = 1995;
+	}
+
+	document.getElementById("myyear").value = year;
+	tempFile = "obesity_state_"+year+".tsv";
+
+	makeScatter();
+
+	queue()
+		.defer(d3.tsv, tempFile, function(d) {
+			rateByState.set(d.state,+d.rate); })
+		.await(change);
+}
+
+function getYearRight() {
+	console.log("getYearRIght");
+	
+	year = parseInt(document.getElementById("myyear").value);
+
+	console.log(year);
+	if(year < 2012) {
+		year = year + 1;
+	} else {
+		year = 2012;
+	}
+
+	document.getElementById("myyear").value = year;
 	tempFile = "obesity_state_"+year+".tsv";
 
 	makeScatter();

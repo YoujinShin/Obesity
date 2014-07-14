@@ -1,8 +1,8 @@
-var margin = { top:22, right:20, bottom:30, left:20 };
+var margin = { top:25, right:20, bottom:30, left:20 };
 
 var widthS = parseInt(d3.select('#scatterG').style('width'), 10),
     widthS = widthS - margin.left - margin.right,
-    heightS = widthS*0.5;
+    heightS = widthS*0.54;
     heightS = heightS - margin.top - margin.bottom;
 
 var parseDate = d3.time.format("%Y").parse;
@@ -66,8 +66,10 @@ function makeBar(error, us) {
                 .attr("width", 20)
                 .attr("height", heightS-10)
                 .style("fill", "rgba(0,0,0,0.0)")
+                // .style("fill", "rgba(10,10,10,0.1)")
                 .attr("stroke-width", 1)
                 .attr("stroke", "black");
+                // .attr("stroke", "rgb(180,180,180)");
 
   var bar = svgS.selectAll(".dot")
                 .data(us)
