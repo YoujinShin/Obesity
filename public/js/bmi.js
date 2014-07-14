@@ -100,7 +100,7 @@ function drawLine(t) {
     var textline = svg2.append("text")
          .attr("x", tx + 14)
          .attr("y", -10)
-         .attr("font-size", "0.9em")
+         .attr("font-size", "1em")
          .text("Your BMI: "+bmiValue)
          .attr("fill", "black");
 }

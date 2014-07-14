@@ -84,8 +84,8 @@ function ready(error, us) {
 }
 
 function change() {
-	console.log("change");
-	console.log(rateByState);
+	// console.log("change");
+	// console.log(rateByState);
 
 	obesity.attr("class", function(d) {
 			var tempData;
@@ -112,6 +112,8 @@ function change() {
 function getYear() {
 	year = document.getElementById("myyear").value;
 	tempFile = "obesity_state_"+year+".tsv";
+
+	makeScatter();
 
 	queue()
 		.defer(d3.tsv, tempFile, function(d) {
