@@ -23,7 +23,7 @@ function quantize(t) {
 
 var projection = d3.geo.albersUsa()
 	.scale(width*1.1)
-	.translate([width*0.5, height*0.57]);
+	.translate([width*0.55, height*0.57]);
 
 var path = d3.geo.path()
 	.projection(projection);
@@ -142,7 +142,7 @@ function getYearLeft() {
 }
 
 function getYearRight() {
-	console.log("getYearRIght");
+	// console.log("getYearRIght");
 	
 	year = parseInt(document.getElementById("myyear").value);
 

@@ -1,8 +1,8 @@
-var margin = { top:25, right:20, bottom:30, left:20 };
+var margin = { top:25, right:40, bottom:20, left:20 };
 
 var widthS = parseInt(d3.select('#scatterG').style('width'), 10),
     widthS = widthS - margin.left - margin.right,
-    heightS = widthS*0.54;
+    heightS = widthS*0.55;
     heightS = heightS - margin.top - margin.bottom;
 
 var parseDate = d3.time.format("%Y").parse;
@@ -84,6 +84,7 @@ function makeBar(error, us) {
                   var tempText;
                   tempText = tooltip.text(d.state+" - "+d.rate+"%" );
                   this.style.stroke = "black";
+
                   tooltip.style("visibility", "visible");
                 })
                 .on("mousemove", function(){
@@ -106,4 +107,35 @@ function makeBar(error, us) {
   //   .attr("y", -6)
   //   .style("text-anchor", "end")
   //   .text("Year");
+
+  // var color = d3.scale.category10();
+
+  // // var color = ["rgb(255,0,0)", "rgb(0,0,255)"];
+  // // var color = ["#fff", "#000"];
+
+  // // console.log(color);
+
+  // var legend = svgS.selectAll(".legend")
+  //     .data(color)
+  //   .enter().append("g")
+  //     // .attr("class", "legend")
+  //     .attr("transform", function(d, i) { 
+  //       // console.log(d);
+  //       // return "translate(0," + i * 20 + ")"; 
+  //       return "translate(" + i * 20 + ",10)"; 
+  //     });
+
+  // legend.append("rect")
+  //     .attr("x", width - 18)
+  //     .attr("width", 18)
+  //     .attr("height", 18)
+  //     .style("fill", color);
+
+  // legend.append("text")
+  //     .attr("x", width - 24)
+  //     .attr("y", 9)
+  //     .attr("dy", ".35em")
+  //     .style("text-anchor", "end")
+  //     .text(function(d) { return d; });
+
 }

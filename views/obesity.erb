@@ -62,6 +62,18 @@
     .q2-9 { fill: #ffd3b1; }
     .q3-9 { fill: #ffb076; }
     .q4-9 { fill: #ff6d00; }
+
+    .legend label, .legend span {
+        display:block;
+        float:left;
+        height:8px;
+        /*width:14.25%;*/
+        width:20%;
+        text-align:center;
+        font-size:10px;
+        color:#808080;
+        margin-top: 3px;
+    }
 	</style>
 
 	<link href="/css/bootstrap.min.css" rel="stylesheet">
@@ -133,18 +145,27 @@
       <img src="/img/t_black_1.png" width="10" onclick="getYearLeft()" style="position:absolute; top:75px; left:35px;" id="left"/>
       
       <img src="/img/t_black_2.png" width="10" onclick="getYearRight()" style="position:absolute; top:75px; left:65px;" id="right"/></div>
+      
+      
+      <div id = "legend" style="position:absolute; top:180px">
+        <strong>Obese (%)</strong>
+        <nav class='legend clearfix'>
+          <span style='background:#b1ddff;'></span>
+          <span style='background:#0092ff;'></span>
+          <span style='background:#ffd3b1;'></span>
+          <span style='background:#ffb076;'></span>
+          <span style='background:#ff6d00;'></span>
+        </nav>
+        <div class="legend-labels">     
+           <div style="float:right; text-align:right;"> >30%</div>
+           <div>0%</div>
+        </div>
+
+      </div>
 
 <!-- 
       <button onclick="getYear()" type="button" class="btn btn-xs btn-default" style="padding-left:10px; padding-right:10px;">year</button> -->
     </div>
-
-
-
-<!--     <div class="col-sm-1">
-      <button onclick="getYear()" type="button" class="btn btn-xs btn-default" style="padding-left:10px; padding-right:10px;">year</button>
-    </div> -->
-
-  <!-- </div> -->
 
     <div class="col-sm-5">
       <div id = "usbmiG"></div> 
@@ -157,7 +178,7 @@
   </div>
 </form>
 
-<p style="color:grey; font-size:0.9em !important; padding-top: 8px;">Source: Centers for Disease Control and Prevention</p>
+<p style="color:grey; font-size:0.9em !important; padding-top: 0px; text-align:right;">Source: Centers for Disease Control and Prevention</p>
 
 <!-- <form class="form-horizontal" role="form" >
   <div class="form-group">
