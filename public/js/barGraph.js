@@ -1,8 +1,8 @@
-var margin = { top:20, right:20, bottom:30, left:20 };
+var margin = { top:22, right:20, bottom:30, left:20 };
 
 var widthS = parseInt(d3.select('#scatterG').style('width'), 10),
     widthS = widthS - margin.left - margin.right,
-    heightS = widthS*0.55;
+    heightS = widthS*0.5;
     heightS = heightS - margin.top - margin.bottom;
 
 var parseDate = d3.time.format("%Y").parse;
