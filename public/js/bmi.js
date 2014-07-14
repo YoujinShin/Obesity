@@ -1,4 +1,4 @@
-var margin = {top: 24, right: 0, bottom: 8, left: 0},
+var margin = {top: 26, right: 0, bottom: 8, left: 0},
     width2 = parseInt(d3.select('#mybmiG').style('width'), 10),
     width2 = width2 - margin.left - margin.right,
     height2 = 68 - margin.top - margin.bottom;
