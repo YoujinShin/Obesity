@@ -9,12 +9,18 @@
 			padding-left: 9%;
 			padding-right: 9%;
 			padding-bottom: 24px;
-      letter-spacing: 1px;
+      letter-spacing: 1px !important;
       font: 1.2em sans-serif !important;
+      /*background-color: black !important;*/
 		}
     h1 {
-      font-size: 3em !important;
+      padding: 0px !important;
+      font-size: 3.5em !important;
       letter-spacing: 1px;
+      /*background-color: black !important;*/
+      /*color: white !important;*/
+      font-weight: 600 !important;
+      opacity: 1;
     }
     p {
       font-size: 1.1em !important;
@@ -67,12 +73,18 @@
         display:block;
         float:left;
         height:8px;
-        /*width:14.25%;*/
         width:20%;
         text-align:center;
         font-size:10px;
         color:#808080;
         margin-top: 3px;
+    }
+    .headDesign {
+      position: absolute;
+      top: 0px;
+      left: 0px;
+      width: 100%;
+      background-color: black !important;
     }
 	</style>
 
@@ -89,9 +101,11 @@
 <script src="http://d3js.org/topojson.v1.min.js"></script>
 
 <!-- <h1 style="background-color:black;">.</h1> -->
+<div class="headDesign">-</div>
 <h1> Body Fat</h1> 
 
-<p style="padding-top:24px; padding-bottom:4px;"> 
+
+<p style="padding-top:26px; padding-bottom:4px;"> 
   <span style="font-weight:bold;">Your body fat  </span> 
   can be measured based on your height and weight as Body Mass Index (BMI).  BMI is one indicator of potential health risks associated with being obese.</p>
 
@@ -138,7 +152,7 @@
 
     <div class="col-sm-1">
       <br><br>
-      <input type="text"  id="myyear" style="width:120px; border-width: 0px 0px 0px 0px; font-size: 34px; letter-spacing:2px;"> 
+      <input type="text"  id="myyear" style="width:120px; border-width: 0px 0px 0px 0px; font-size: 34px; letter-spacing:2px; font-weight: 100 !important;"> 
       <br><br>
       
       <div style="opacity:0.3;">
