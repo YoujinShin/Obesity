@@ -11,14 +11,11 @@
 			padding-bottom: 24px;
       letter-spacing: 1px !important;
       font: 1.2em sans-serif !important;
-      /*background-color: black !important;*/
 		}
     h1 {
       padding: 0px !important;
       font-size: 3.5em !important;
       letter-spacing: 1px;
-      /*background-color: black !important;*/
-      /*color: white !important;*/
       font-weight: 600 !important;
       opacity: 1;
     }
@@ -35,15 +32,20 @@
 			border-style: solid; 
 			border-width: 0px 0px 1px 0px; 
 			border-color: black;
+      border-radius: 0px;
+      box-shadow: none;
 		}
 		input:focus
 		{ 
 			outline: 0;
 		}
 		form {
-      padding: 4px;
-			padding-top: 18px;
+      padding: 2px;
+			padding-top: 16px;
+      padding-left: 15px;
+      padding-right: 15px;
 		}
+
     .form_design {
       background-color: rgb(249,249,249);
     }
@@ -86,6 +88,16 @@
       width: 100%;
       background-color: black !important;
     }
+    .line {
+      fill: none;
+      stroke: grey;
+      stroke-width: 1.0px;
+      /*stroke-dasharray: 5,5;*/
+    }
+    .rectDesign {
+      stroke: black !important;
+      stroke-width: 1px !important;
+    }
 	</style>
 
 	<link href="/css/bootstrap.min.css" rel="stylesheet">
@@ -104,7 +116,6 @@
 <div class="headDesign">-</div>
 <h1> Body Fat</h1> 
 
-
 <p style="padding-top:26px; padding-bottom:4px;"> 
   <span style="font-weight:bold;">Your body fat  </span> 
   can be measured based on your height and weight as Body Mass Index (BMI).  BMI is one indicator of potential health risks associated with being obese.</p>
@@ -114,21 +125,18 @@
   <div class="form-group">
     <label class="col-sm-2 control-label" style="font-weight:normal;">Height (cm)</label>
     <div class="col-sm-1">
-      <input type="text"  id="myheight" style="width:120px;font-size:1em;">
+      <input type="text"  id="myheight" style="width:120px;ont-size:1em; padding:5px">
     </div>
 
     <label class="col-sm-2 control-label" style="font-weight:normal;">Weight (kg)</label>
     <div class="col-sm-1">
-      <input type="text" id="myweight" style="width:120px;ont-size:1em;">
+      <input type="text" id="myweight" style="width:120px;ont-size:1em; padding:5px">
     </div>
 
-    <div class="col-sm-offset-1 col-sm-1">
+    <div class="col-sm-offset-1 col-sm-1" style="padding-top:6px">
       <button onclick="getBMI()" type="button" class="btn btn-xs btn-default" style="padding-left:10px; padding-right:10px;">submit</button>
     </div>
 
-<!--     <div class="col-sm-2">
-      <input type="text" id="mybmi" style="width:120px;">
-    </div> -->
   </div>
 </form>
 
@@ -142,13 +150,8 @@
 
 
 <!--  -->
-
 <form class="form-horizontal" role="form" style="padding: 2px;">
   <div class="form-group">
-      <!-- <div class="form-group"> -->
-<!--     <label class="col-sm-2 control-label" style="font-weight:normal;">Year: </label> -->
-
-
 
     <div class="col-sm-1">
       <br><br>
@@ -176,9 +179,6 @@
         </div>
 
       </div>
-
-<!-- 
-      <button onclick="getYear()" type="button" class="btn btn-xs btn-default" style="padding-left:10px; padding-right:10px;">year</button> -->
     </div>
 
     <div class="col-sm-5">
@@ -193,18 +193,6 @@
 </form>
 
 <p style="color:grey; font-size:0.9em !important; padding-top: 0px; text-align:right;">Source: Centers for Disease Control and Prevention</p>
-
-<!-- <form class="form-horizontal" role="form" >
-  <div class="form-group">
-    <div class="col-sm-1">
-      <input type="text"  id="myyear" style="width:120px;">
-    </div>
-
-    <div class="col-sm-offset-1 col-sm-1">
-      <button onclick="getYear()" type="button" class="btn btn-xs btn-default" style="padding-left:10px; padding-right:10px;">submit</button>
-    </div>
-  </div>
-</form> -->
 
 <!--  -->
 <script src="/js/bmi.js"></script>

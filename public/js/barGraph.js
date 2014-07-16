@@ -31,17 +31,45 @@ var svgS = d3.select("#scatterG").append("svg")
 var rate = d3.map();
 var obesity_data = "obesity_data.tsv";
 
+var state_x = 0;
+var state_y = 0;
+var tf = -1;
+
+var selectedState = "Florida";
+
 queue()
   .defer(d3.tsv, "obesity_data.tsv")
+  .defer(d3.tsv, "obesity_data.tsv", function(d) {
+    if(d.state === selectedState) {
+      rateByState.set(d.year, +d.rate);
+    }
+    // if(tf === -1) {
+    //   if(d.state === selectedState) {
+    //     console.log(d.rate);
+    //     state_y = y(d.rate);
+    //     tf = 1;
+    //   }
+    // }
+  })
   .await(makeBar);
 
 function makeScatter() {
   queue()
     .defer(d3.tsv, "obesity_data.tsv")
+    .defer(d3.tsv, "obesity_data.tsv", function(d) {
+      if(tf === -1) {
+        if(d.state === selectedState) {
+          state_x = 0;
+          state_y = y(d.rate);
+          tf = 1;
+        }
+      }
+    })
     .await(makeBar);
 }
 
 function makeBar(error, us) {
+  // console.log(rateByState);
 
   var bg = svgS.append("rect")
                 .attr("x", -margin.left)
@@ -61,15 +89,14 @@ function makeBar(error, us) {
   var currentYear = parseDate( parseString(year) );
 
   var rectangle = svgS.append("rect")
+                .attr("class", "rectDesign")
                 .attr("x", x(currentYear) - 10)
                 .attr("y", 10)
                 .attr("width", 20)
                 .attr("height", heightS-10)
                 .style("fill", "rgba(0,0,0,0.0)")
-                // .style("fill", "rgba(10,10,10,0.1)")
-                .attr("stroke-width", 1)
+                // .attr("stroke-width", 1)
                 .attr("stroke", "black");
-                // .attr("stroke", "rgb(180,180,180)");
 
   var bar = svgS.selectAll(".dot")
                 .data(us)
@@ -81,61 +108,47 @@ function makeBar(error, us) {
                 .attr("cy", function(d) { return y(d.rate); })
                 .attr("class", function(d) { return quantize(d.rate); })
                 .on("mouseover", function(d){
-                  var tempText;
-                  tempText = tooltip.text(d.state+" - "+d.rate+"%" );
-                  this.style.stroke = "black";
-
+                  // var tempText;
+                  tooltip.text(d.state+" - "+d.rate+"%" );
+                  // this.style.stroke = "black";
                   tooltip.style("visibility", "visible");
                 })
                 .on("mousemove", function(){
                   tooltip.style("top", (event.pageY-10)+"px").style("left",(event.pageX+10)+"px");})
                 .on("mouseout", function(){
                   this.style.stroke = "none";
-                  tooltip.style("visibility", "hidden");})
-                .on("click", function(d) {
-
-                });
+                  tooltip.style("visibility", "hidden");});
 
   svgS.append("g")
     .attr("class", "x axis")
     .attr("transform", "translate(0,"+ heightS +")")
-    // .ticks(5)
     .call(xAxis);
-  // .append("text")
-  //   // .attr("class", "xlabel")
-  //   .attr("x", widthS)
-  //   .attr("y", -6)
-  //   .style("text-anchor", "end")
-  //   .text("Year");
 
-  // var color = d3.scale.category10();
+  if(tf === 1) {
+    console.log(selectedState);
+    var line = d3.svg.line()
+      .x(function(d) { 
+        if(d.state === selectedState) { state_x = x(d.year);  }
+        return state_x;
+      })
+      .y(function(d) { 
+        if(d.state === selectedState) { state_y =  y(d.rate);  }
+        return state_y;
+      });
 
-  // // var color = ["rgb(255,0,0)", "rgb(0,0,255)"];
-  // // var color = ["#fff", "#000"];
+    svgS.append("path")
+        .datum(us)
+        .attr("class", "line")
+        .attr("d", line)
+        .attr("stroke-dasharray", "2,4");
 
-  // // console.log(color);
+    tf = -1;
 
-  // var legend = svgS.selectAll(".legend")
-  //     .data(color)
-  //   .enter().append("g")
-  //     // .attr("class", "legend")
-  //     .attr("transform", function(d, i) { 
-  //       // console.log(d);
-  //       // return "translate(0," + i * 20 + ")"; 
-  //       return "translate(" + i * 20 + ",10)"; 
-  //     });
-
-  // legend.append("rect")
-  //     .attr("x", width - 18)
-  //     .attr("width", 18)
-  //     .attr("height", 18)
-  //     .style("fill", color);
-
-  // legend.append("text")
-  //     .attr("x", width - 24)
-  //     .attr("y", 9)
-  //     .attr("dy", ".35em")
-  //     .style("text-anchor", "end")
-  //     .text(function(d) { return d; });
-
+    svgS.append("text")
+            .attr("x", 5)
+            .attr("y", 76)
+            .attr("font-size", "1em")
+            .text(selectedState)
+            .attr("fill", "grey");
+  }
 }

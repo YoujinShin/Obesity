@@ -2,9 +2,6 @@ var margin = {top: 26, right: 0, bottom: 8, left: 0},
     width2 = parseInt(d3.select('#mybmiG').style('width'), 10),
     width2 = width2 - margin.left - margin.right,
     height2 = 68 - margin.top - margin.bottom;
-    // width = 220 - margin.left - margin.right,
-    // height = 50 - margin.top - margin.bottom;
-
 
 var svg2 = d3.select("#mybmiG").append("svg")
     .attr("width", width2 + margin.left + margin.right)
@@ -26,8 +23,6 @@ function getBMI() {
 
   tempbmi = Math.max(0, Math.min(tempbmi, maxWidth));
   bmiValue = tempbmi;
-
-  // document.getElementById("mybmi").value = tempbmi;
 
   drawrect();
   showText(tempbmi);
@@ -67,7 +62,7 @@ function stateLine(t) {
 
 
 function showText(t) {
-  // var bmiStatus;
+
   if(t <= 18.5) {
     bmiStatus = "Underweight";
   } else if(t > 18.5 && t <= 25) {
@@ -135,9 +130,7 @@ function drawrect() {
                   .attr("y", h2+g)
                   .attr("width", x1)
                   .attr("height", h)
-                  // .style("fill", "#b1ddff")
-                  .style("fill", "rgb(220,220,220)")
-                // .append("line")
+                  .style("fill", "rgb(210,210,210)")
                   .attr("stroke-width", 1)
                   .attr("stroke", "white");
 
@@ -154,8 +147,7 @@ function drawrect() {
                   .attr("y", h2+g)
                   .attr("width", x2-x1)
                   .attr("height", h)
-                  // .style("fill", "#0092ff")
-                  .style("fill", "rgb(100,100,100)")
+                  .style("fill", "rgb(60,60,60)")
                   .attr("stroke-width", 1)
                   .attr("stroke", "white");
 
@@ -171,8 +163,7 @@ function drawrect() {
                   .attr("y", h2+g)
                   .attr("width", x3-x2)
                   .attr("height", h)
-                  .style("fill", "rgb(220,220,220)")
-                  // .style("fill", "#ffd3b1")//#0092ff")
+                  .style("fill", "rgb(210,210,210)")
                   .attr("stroke-width", 1)
                   .attr("stroke", "white");
 
@@ -188,8 +179,7 @@ function drawrect() {
                   .attr("y", h2+g)
                   .attr("width", x4-x3)
                   .attr("height", h)
-                  .style("fill", "rgb(100,100,100)")
-                  // .style("fill", "#ff6d00")//"#ff0f00")
+                  .style("fill", "rgb(60,60,60)")
                   .attr("stroke-width", 1)
                   .attr("stroke", "white");
 

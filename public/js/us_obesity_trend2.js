@@ -45,6 +45,7 @@ queue()
 	.await(ready);
 
 var obesity;
+// var click_tf = -1;
 
 function ready(error, us) {
 	// console.log(rateByState);
@@ -78,13 +79,13 @@ function ready(error, us) {
 				this.style.stroke = "white";
 				tooltip.style("visibility", "hidden");})
 			.on("click", function(d) {
-
+				// this.style.stroke = "black";
+				selectedState = d.properties.name;
+				makeScatter();
 			});
 }
 
 function change() {
-	// console.log("change");
-	// console.log(rateByState);
 
 	obesity.attr("class", function(d) {
 			var tempData;
@@ -104,7 +105,9 @@ function change() {
 			this.style.stroke = "white";
 			tooltip.style("visibility", "hidden");})
 		.on("click", function(d) {
-
+			// this.style.stroke = "black";
+			selectedState = d.properties.name;
+			makeScatter();
 		});
 }
 
