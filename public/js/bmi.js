@@ -19,7 +19,8 @@ var bmiValue;
 function getBMI() {
   var temph = document.getElementById("myheight").value;
   var tempw = document.getElementById("myweight").value;
-  var tempbmi = d3.format(".2f")(tempw/(temph * temph / 10000));
+  // var tempbmi = d3.format(".2f")(tempw/(temph * temph / 10000)); // for kg, cm
+  var tempbmi = d3.format(".2f")(tempw * 703 /(temph * temph)); // for in, lb
 
   tempbmi = Math.max(0, Math.min(tempbmi, maxWidth));
   bmiValue = tempbmi;

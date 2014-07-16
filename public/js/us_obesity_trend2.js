@@ -4,6 +4,7 @@ var width = parseInt(d3.select('#usbmiG').style('width'), 10),
 var rateByState = d3.map();
 
 var year = 2012;
+var stateClicked = -1;
 
 function quantize(t) {
 	var bmiStatus;
@@ -82,8 +83,11 @@ function ready(error, us) {
 				// this.style.stroke = "black";
 				selectedState = d.properties.name;
 				makeScatter();
+				stateClicked = 1;
 			});
 }
+
+
 
 function change() {
 
@@ -107,6 +111,7 @@ function change() {
 		.on("click", function(d) {
 			// this.style.stroke = "black";
 			selectedState = d.properties.name;
+			stateClicked = 1;
 			makeScatter();
 		});
 }

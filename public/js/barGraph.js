@@ -57,7 +57,7 @@ function makeScatter() {
   queue()
     .defer(d3.tsv, "obesity_data.tsv")
     .defer(d3.tsv, "obesity_data.tsv", function(d) {
-      if(tf === -1) {
+      if(tf === -1 && stateClicked == 1) {
         if(d.state === selectedState) {
           state_x = 0;
           state_y = y(d.rate);
@@ -124,8 +124,8 @@ function makeBar(error, us) {
     .attr("transform", "translate(0,"+ heightS +")")
     .call(xAxis);
 
-  if(tf === 1) {
-    console.log(selectedState);
+  if(tf === 1 && stateClicked == 1) {
+    // console.log(selectedState);
     var line = d3.svg.line()
       .x(function(d) { 
         if(d.state === selectedState) { state_x = x(d.year);  }
@@ -145,10 +145,10 @@ function makeBar(error, us) {
     tf = -1;
 
     svgS.append("text")
-            .attr("x", 5)
-            .attr("y", 76)
-            .attr("font-size", "1em")
+            .attr("x", 0)
+            .attr("y", 55)
+            .attr("font-size", "1.1em")
             .text(selectedState)
-            .attr("fill", "grey");
+            .attr("fill", "rgb(140,140,140)");
   }
 }
