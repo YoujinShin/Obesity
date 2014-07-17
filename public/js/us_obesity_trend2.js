@@ -46,7 +46,6 @@ queue()
 	.await(ready);
 
 var obesity;
-// var click_tf = -1;
 
 function ready(error, us) {
 	// console.log(rateByState);

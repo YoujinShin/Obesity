@@ -43,13 +43,6 @@ queue()
     if(d.state === selectedState) {
       rateByState.set(d.year, +d.rate);
     }
-    // if(tf === -1) {
-    //   if(d.state === selectedState) {
-    //     console.log(d.rate);
-    //     state_y = y(d.rate);
-    //     tf = 1;
-    //   }
-    // }
   })
   .await(makeBar);
 
@@ -69,7 +62,6 @@ function makeScatter() {
 }
 
 function makeBar(error, us) {
-  // console.log(rateByState);
 
   var bg = svgS.append("rect")
                 .attr("x", -margin.left)
@@ -95,7 +87,7 @@ function makeBar(error, us) {
                 .attr("width", 20)
                 .attr("height", heightS-10)
                 .style("fill", "rgba(0,0,0,0.0)")
-                // .attr("stroke-width", 1)
+                .attr("stroke-width", 1)
                 .attr("stroke", "black");
 
   var bar = svgS.selectAll(".dot")
@@ -108,7 +100,6 @@ function makeBar(error, us) {
                 .attr("cy", function(d) { return y(d.rate); })
                 .attr("class", function(d) { return quantize(d.rate); })
                 .on("mouseover", function(d){
-                  // var tempText;
                   tooltip.text(d.state+" - "+d.rate+"%" );
                   // this.style.stroke = "black";
                   tooltip.style("visibility", "visible");
@@ -125,7 +116,6 @@ function makeBar(error, us) {
     .call(xAxis);
 
   if(tf === 1 && stateClicked == 1) {
-    // console.log(selectedState);
     var line = d3.svg.line()
       .x(function(d) { 
         if(d.state === selectedState) { state_x = x(d.year);  }
@@ -149,6 +139,7 @@ function makeBar(error, us) {
             .attr("y", 55)
             .attr("font-size", "1.1em")
             .text(selectedState)
-            .attr("fill", "rgb(140,140,140)");
+            .attr("fill", "black");
+            // .attr("fill", "rgb(140,140,140)");
   }
 }
