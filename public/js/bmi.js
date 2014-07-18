@@ -27,7 +27,17 @@ function getBMI() {
 
   drawrect();
   showText(tempbmi);
-  drawLine(tempbmi);
+  // drawLine(tempbmi);
+
+
+  var normalw_min = d3.format(".2f")(18.5 * (temph * temph) / 703);
+  var normalw_max = d3.format(".2f")(25 * (temph * temph) / 703);
+  // console.log(normalw_min);
+
+  drawLine(tempbmi, normalw_min, normalw_max);
+
+  // document.getElementById("normalweight").innerHTML = "> expected weight: </span>" + normalw_min 
+  //   +" - " + normalw_max + (" (lb)");
 }
 
 
@@ -76,7 +86,7 @@ function showText(t) {
   // document.getElementById("mybmiStatus").innerHTML  = ">> You are in " + bmiStatus;
 }
 
-function drawLine(t) {
+function drawLine(t, t1, t2) {
   var txScale = d3.scale.linear()
                   .domain([0, maxWidth])
                   .range([0, width2]);
@@ -93,12 +103,26 @@ function drawLine(t) {
          .attr('height', 14)
          .attr("xlink:href","/img/t_black.png");
 
+    // var textline = svg2.append("text")
+    //      .attr("x", tx + 14)
+    //      .attr("y", -10)
+    //      .attr("font-size", "1em")
+    //      .text("Your BMI: "+bmiValue)
+    //      .attr("fill", "black");
+
     var textline = svg2.append("text")
          .attr("x", tx + 14)
          .attr("y", -10)
          .attr("font-size", "1em")
          .text("Your BMI: "+bmiValue)
          .attr("fill", "black");
+
+    var textline2 = svg2.append("text")
+         .attr("x", tx + 140)
+         .attr("y", -10)
+         .attr("font-size", "1em")
+         .text(":  "+t1 +" - " + t2 + "(lb)" + " for normal status")
+         .attr("fill", "rgb(150,150,150)");
 }
 
 
