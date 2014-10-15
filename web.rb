@@ -2,7 +2,8 @@ require 'sinatra'
 require 'rubygems' 
 
 get '/' do
-	erb :obesity
+	# erb :obesity
+	erb :obesity_rate
 end
 
 get '/obesity' do
