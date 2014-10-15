@@ -63,7 +63,7 @@ function makeBar(error, us) {
                 .data(us)
               .enter().append("circle")
                 .attr("class", "dot")
-                .attr("r", 2.3)
+                .attr("r", 2)
                 .attr("cx", function(d) { return x(d.year); })
                 .attr("cx", function(d) { return x(d.year); })
                 .attr("cy", function(d) { 

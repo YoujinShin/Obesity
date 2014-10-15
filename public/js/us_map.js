@@ -70,15 +70,23 @@ function connectToDots(name) {
     if(e.state==name) {
       // console.log(e.state);
       d3.select(this).style("opacity", 1);
-      d3.select(this).attr("r", 6);
+      d3.select(this)
+        .transition()
+          .duration(380)
+          .attr("r", 7);
+      // d3.select(this).attr("r", 6);
     }
   });
 }  
 
 function resetDots() {
   svgS.selectAll("circle").each(function(e) {
-    d3.select(this).style("opacity", 1);
-    d3.select(this).attr("r", 2.3);
+    d3.select(this).style("opacity", 0.9);
+    d3.select(this)
+      .transition()
+        .duration(0)
+        .attr("r", 2);
+    // d3.select(this).attr("r", 2.3);
   });
 }  
 
