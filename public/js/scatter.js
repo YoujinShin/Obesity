@@ -77,6 +77,14 @@ function makeBar(error, us) {
     .attr("class", "x axis")
     .attr("transform", "translate(0,"+ heightS +")")
     .call(xAxis);
+
+
+  // svgS.selectAll("circle").each(function(d) {
+  //   // console.log("hi");
+  //   if(d.state==N) {
+  //     d3.select(this).attr("radius", 10);
+  //   }
+  // });  
 }
 
 function getY(d) {
@@ -130,4 +138,5 @@ function getY(d) {
   else if(d=='West Virginia') return 47*gap;
   else if(d=='Wisconsin') return 48*gap;
   else if(d=='Wyoming') return 49*gap;
+  else return -100;
 }

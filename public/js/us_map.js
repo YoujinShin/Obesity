@@ -45,27 +45,42 @@ function ready(error, us) {
         .data(us.features); // geojson
 
   obesity.enter().append("path")
-        // .attr("class", function(d) {
-        //   return "rgb(180,180,180)";
-        // })
       .attr("d", path)// for tooltip
       .on("mouseover", function(d){
-        var tempText;
-        tempText = tooltip.text(d.properties.name);
-        // this.style.stroke = "black";
+        var tempText = tooltip.text(d.properties.name);
         this.style.fill = "#9cdede"
         tooltip.style("visibility", "visible");
+
+        connectToDots(d.properties.name);
       })
       .on("mousemove", function(){
-        tooltip.style("top", (event.pageY-10)+"px").style("left",(event.pageX+10)+"px");})
+        tooltip.style("top", (event.pageY-10)+"px").style("left",(event.pageX+10)+"px");
+      })
       .on("mouseout", function(){
-        // this.style.stroke = "white";
         this.style.fill = "rgba(255,255,255,0.6)";
-        tooltip.style("visibility", "hidden");});
-      // .on("click", function(d) {
-      //   // this.style.stroke = "black";
-      //   selectedState = d.properties.name;
-      //   makeScatter();
-      //   stateClicked = 1;
-      // });
+        tooltip.style("visibility", "hidden");
+
+        resetDots();
+      });
 }
+
+function connectToDots(name) {
+  svgS.selectAll("circle").each(function(e) {
+    
+    if(e.state==name) {
+      // console.log(e.state);
+      d3.select(this).style("opacity", 1);
+      d3.select(this).attr("r", 6);
+    }
+  });
+}  
+
+function resetDots() {
+  svgS.selectAll("circle").each(function(e) {
+    d3.select(this).style("opacity", 1);
+    d3.select(this).attr("r", 2.3);
+  });
+}  
+
+
+
