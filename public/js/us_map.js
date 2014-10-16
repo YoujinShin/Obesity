@@ -85,7 +85,7 @@ function resetDots() {
     d3.select(this)
       .transition()
         .duration(0)
-        .attr("r", 2);
+        .attr("r", 2.2);
     // d3.select(this).attr("r", 2.3);
   });
 }  

@@ -63,7 +63,7 @@ function makeBar(error, us) {
                 .data(us)
               .enter().append("circle")
                 .attr("class", "dot")
-                .attr("r", 2)
+                .attr("r", 2.2)
                 .attr("cx", function(d) { return x(d.year); })
                 .attr("cx", function(d) { return x(d.year); })
                 .attr("cy", function(d) { 
@@ -72,6 +72,32 @@ function makeBar(error, us) {
                   // return y(d.rate); 
                 })
                 .attr("class", function(d) { return quantize(d.rate); });
+
+  bar.on("mouseover", function(d){
+        // console.log(d.state);
+        var tempText = tooltip.text(d.state);
+        // this.style.fill = "#9cdede"
+        tooltip.style("visibility", "visible");
+
+        d3.select(this).style("opacity", 1);
+        d3.select(this)
+          .transition()
+            .duration(150)
+            .attr("r", 7);
+      })
+      .on("mousemove", function(){
+        tooltip.style("top", (event.pageY-10)+"px").style("left",(event.pageX+10)+"px");
+      })
+      .on("mouseout", function(){
+        // this.style.fill = "rgba(255,255,255,0.6)";
+        tooltip.style("visibility", "hidden");
+
+        d3.select(this).style("opacity", 0.9);
+        d3.select(this)
+          .transition()
+            .duration(0)
+            .attr("r", 2.2);
+      });
 
   svgS.append("g")
     .attr("class", "x axis")
