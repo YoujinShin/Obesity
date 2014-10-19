@@ -2,7 +2,6 @@
 var margin = { top:30, right:60, bottom:20, left:40 };
 
 var widthS = parseInt(d3.select('#scatterG').style('width'), 10),
-// var widthS = 180;
     widthS = widthS - margin.left - margin.right,
 
     heightS = 530;
@@ -37,11 +36,36 @@ var state_x = 0;
 var state_y = 0;
 var tf = -1;
 
+var data;
+
+// Data Change
+d3.select(".graph")
+  .on("click", function(){
+    svgS.selectAll("circle")
+      .transition()
+        .duration(430)
+      .attr("cy", function(d) {
+        return y(d.rate);
+      });
+  });
+
+d3.select(".scatter")
+  .on("click", function(){
+    svgS.selectAll("circle")
+      .transition()
+        .duration(430)
+      .attr("cy", function(d) {
+        return getY(d.state);
+      });
+  });
+
 queue()
   .defer(d3.tsv, "obesity_data.tsv")
   .await(makeBar);
 
 function makeBar(error, us) {
+  data = us;
+
   var bg = svgS.append("rect")
                 .attr("x", -margin.left)
                 .attr("y", -margin.top)
@@ -63,7 +87,7 @@ function makeBar(error, us) {
                 .data(us)
               .enter().append("circle")
                 .attr("class", "dot")
-                .attr("r", 2.2)
+                .attr("r", 3)
                 .attr("cx", function(d) { return x(d.year); })
                 .attr("cx", function(d) { return x(d.year); })
                 .attr("cy", function(d) { 
@@ -74,7 +98,6 @@ function makeBar(error, us) {
                 .attr("class", function(d) { return quantize(d.rate); });
 
   bar.on("mouseover", function(d){
-        // console.log(d.state);
         var tempText = tooltip.text(d.state);
         // this.style.fill = "#9cdede"
         tooltip.style("visibility", "visible");
@@ -84,33 +107,26 @@ function makeBar(error, us) {
           .transition()
             .duration(150)
             .attr("r", 7);
+
+        // d3.select(this).parentNode.appendChild(this);
       })
       .on("mousemove", function(){
         tooltip.style("top", (event.pageY-10)+"px").style("left",(event.pageX+10)+"px");
       })
       .on("mouseout", function(){
-        // this.style.fill = "rgba(255,255,255,0.6)";
         tooltip.style("visibility", "hidden");
 
         d3.select(this).style("opacity", 0.9);
         d3.select(this)
           .transition()
             .duration(0)
-            .attr("r", 2.2);
+            .attr("r", 3);
       });
 
   svgS.append("g")
     .attr("class", "x axis")
     .attr("transform", "translate(0,"+ heightS +")")
-    .call(xAxis);
-
-
-  // svgS.selectAll("circle").each(function(d) {
-  //   // console.log("hi");
-  //   if(d.state==N) {
-  //     d3.select(this).attr("radius", 10);
-  //   }
-  // });  
+    .call(xAxis); 
 }
 
 function getY(d) {
@@ -166,3 +182,9 @@ function getY(d) {
   else if(d=='Wyoming') return 49*gap;
   else return -100;
 }
+
+// d3.selection.prototype.moveToFront = function() {
+//   return this.each(function(){
+//   this.parentNode.appendChild(this);
+//   });
+// };

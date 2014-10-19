@@ -1,5 +1,5 @@
 var width = parseInt(d3.select('#usbmiG').style('width'), 10),
-  height = 400;
+    height = 400;
 
 function quantize(t) {
   var bmiStatus;
@@ -48,7 +48,8 @@ function ready(error, us) {
       .attr("d", path)// for tooltip
       .on("mouseover", function(d){
         var tempText = tooltip.text(d.properties.name);
-        this.style.fill = "#9cdede"
+        this.style.fill = "#9cdede";
+        // this.style.stroke = "fff";
         tooltip.style("visibility", "visible");
 
         connectToDots(d.properties.name);
@@ -68,13 +69,15 @@ function connectToDots(name) {
   svgS.selectAll("circle").each(function(e) {
     
     if(e.state==name) {
-      // console.log(e.state);
       d3.select(this).style("opacity", 1);
+      d3.select(this).style("stroke", "#000");
       d3.select(this)
         .transition()
           .duration(380)
-          .attr("r", 7);
+          .attr("r", 5);
       // d3.select(this).attr("r", 6);
+
+      // d3.select(this).parentNode.appendChild(this);
     }
   });
 }  
@@ -82,11 +85,11 @@ function connectToDots(name) {
 function resetDots() {
   svgS.selectAll("circle").each(function(e) {
     d3.select(this).style("opacity", 0.9);
+    d3.select(this).style("stroke", "none");
     d3.select(this)
       .transition()
         .duration(0)
-        .attr("r", 2.2);
-    // d3.select(this).attr("r", 2.3);
+        .attr("r", 3);
   });
 }  
 
