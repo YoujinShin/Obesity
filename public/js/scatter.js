@@ -108,6 +108,7 @@ function makeBar(error, us) {
             .duration(150)
             .attr("r", 7);
 
+        // d3.select(this).moveToFront();
         // d3.select(this).parentNode.appendChild(this);
       })
       .on("mousemove", function(){
@@ -185,6 +186,6 @@ function getY(d) {
 
 // d3.selection.prototype.moveToFront = function() {
 //   return this.each(function(){
-//   this.parentNode.appendChild(this);
+//     this.parentNode.appendChild(this);
 //   });
 // };
