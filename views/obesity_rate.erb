@@ -37,7 +37,6 @@
     .axis line {
       fill: none;
       stroke: #999999;
-      /*stroke-weight: 10px;*/
     }
 
     .dot {
@@ -59,7 +58,6 @@
       padding: 20px;             
       margin: 10px;
       font: 12px sans-serif;        
-      /*background: lightsteelblue;   */
       border: 1px;      
       border-radius: 2px;           
       pointer-events: none;   
@@ -89,17 +87,19 @@
         margin: 6px;
         text-align:center;
         font-size:10px;
-        /*color:#808080;*/
-        /*margin-top: 3px;*/
     }
-    
+
 /*    .scatter {
       position: absolute;
-      right: 15%;
+      top: 260px;
+      left: 100px;
+      z-index: 2px;
     }
     .graph {
       position: absolute;
-      right: 10%;
+      top: 260px;
+      left: 160px;
+      z-index: 2px;
     }*/
 	</style>
 
@@ -110,7 +110,6 @@
 
 
 <body>
-
 <script src="http://d3js.org/d3.v3.min.js"></script>
 <script src="http://d3js.org/queue.v1.min.js"></script>
 <script src="http://d3js.org/topojson.v1.min.js"></script>
@@ -118,7 +117,10 @@
 <h1>Obesity in US</h1> 
 
 <br>
-<p style="padding-top:18px;">Obesity prevalence (percent of obese: BMI >30) varies across states.</p><p> The visualization shows the history of United States obesity prevalence from 1995 through 2012. </p>
+<p style="padding-top:18px;">Obesity prevalence (percent of obese: BMI >30) varies across states.</p>
+<p> The visualization shows the history of United States obesity prevalence from 1995 through 2012. </p>
+<p style="padding-bottom:0px">Colorado state recorded the lowest obesity rate and Missisipi got the highest obesity rate in the US history.</p>
+
 
 <!-- <button type="button" onclick="alert('Hello world!')">Click Me!</button> -->
 <button class="scatter">Scatter</button>
@@ -145,13 +147,11 @@
         <span style='background:#f0b4a3;'></span>
         <span style='background:#e3704e;'></span>
         <span style='background:#de552c;'></span>
-
       </nav>
       <div class="legend-labels">     
          <div style="float:right; text-align:right;"> +30%</div>
          <div>0%</div>
       </div>
-
 </div>
 <!-- <div id = "scatterG"></div>  -->
 
@@ -163,5 +163,4 @@
 <script src="/js/scatter.js"></script>
 <!-- <script src="/js/us_obesity_trend2.js"></script> -->
 <!-- <link href="/css/us_obesity.css" rel="stylesheet"> -->
-
 </body>
