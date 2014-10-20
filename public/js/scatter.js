@@ -89,12 +89,7 @@ function makeBar(error, us) {
                 .attr("class", "dot")
                 .attr("r", 3)
                 .attr("cx", function(d) { return x(d.year); })
-                .attr("cx", function(d) { return x(d.year); })
-                .attr("cy", function(d) { 
-                  // console.log(d.state);
-                  return getY(d.state);
-                  // return y(d.rate); 
-                })
+                .attr("cy", function(d) { return getY(d.state); })
                 .attr("class", function(d) { return quantize(d.rate); });
 
   bar.on("mouseover", function(d){
@@ -128,6 +123,15 @@ function makeBar(error, us) {
     .attr("class", "x axis")
     .attr("transform", "translate(0,"+ heightS +")")
     .call(xAxis); 
+
+  // var line = d3.svgS.line()
+  //   .x(function(d) { return x(d.year); })
+  //   .y(function(d) { return getY(d.state); });
+
+  // svgS.append("path")
+  //     .datum(data)
+  //     .attr("class", "line")
+  //     .attr("d", line);
 }
 
 function getY(d) {
