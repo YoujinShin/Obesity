@@ -104,7 +104,6 @@ function makeBar(error, us) {
             .attr("r", 7);
 
         // d3.select(this).moveToFront();
-        // d3.select(this).parentNode.appendChild(this);
       })
       .on("mousemove", function(){
         tooltip.style("top", (event.pageY-10)+"px").style("left",(event.pageX+10)+"px");
@@ -123,15 +122,6 @@ function makeBar(error, us) {
     .attr("class", "x axis")
     .attr("transform", "translate(0,"+ heightS +")")
     .call(xAxis); 
-
-  // var line = d3.svgS.line()
-  //   .x(function(d) { return x(d.year); })
-  //   .y(function(d) { return getY(d.state); });
-
-  // svgS.append("path")
-  //     .datum(data)
-  //     .attr("class", "line")
-  //     .attr("d", line);
 }
 
 function getY(d) {
@@ -188,8 +178,3 @@ function getY(d) {
   else return -100;
 }
 
-// d3.selection.prototype.moveToFront = function() {
-//   return this.each(function(){
-//     this.parentNode.appendChild(this);
-//   });
-// };

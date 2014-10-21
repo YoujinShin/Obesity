@@ -66,6 +66,8 @@ function ready(error, us) {
 }
 
 function connectToDots(name) {
+  var tempData = [];
+
   svgS.selectAll("circle").each(function(e) {
     
     if(e.state==name) {
@@ -75,12 +77,16 @@ function connectToDots(name) {
         .transition()
           .duration(380)
           .attr("r", 5);
-      // d3.select(this).attr("r", 6);
 
+      d3.select(this).moveToFront();
+
+      // d3.select(this).attr("r", 6);
       // d3.select(this).parentNode.appendChild(this);
     }
   });
-}  
+
+  // console.log(svgS.selectAll("path"));
+}
 
 function resetDots() {
   svgS.selectAll("circle").each(function(e) {
@@ -91,7 +97,13 @@ function resetDots() {
         .duration(0)
         .attr("r", 3);
   });
-}  
+}
 
+d3.selection.prototype.moveToFront = function() {
+  console.log('hi');
+  return this.each(function(){
+    this.parentNode.appendChild(this);
+  });
+};
 
 
